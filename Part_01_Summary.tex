@@ -1,0 +1,137 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+
+\pdfinfo{
+  /Title (Part_01_Summary.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Khoo Wu Zhe Samuel)
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+  % This sets page margins to .5 inch if using letter paper, and to 1cm
+  % if using A4 paper. (This probably isn't strictly necessary.)
+  % If using another size paper, use default 1cm margins.
+  \ifthenelse{\lengthtest { \paperwidth = 11in}}
+  	{ \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+  	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+  		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+  		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+  	}
+
+  % Turn off header and footer
+  \pagestyle{empty}
+
+
+  % Redefine section commands to use less space
+  \makeatletter
+  \renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                  {-1ex plus -.5ex minus -.2ex}%
+                                  {0.5ex plus .2ex}%x
+                                  {\normalfont\large\bfseries}}
+  \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                  {-1explus -.5ex minus -.2ex}%
+                                  {0.5ex plus .2ex}%
+                                  {\normalfont\normalsize\bfseries}}
+  \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                  {-1ex plus -.5ex minus -.2ex}%
+                                  {1ex plus .2ex}%
+                                  {\normalfont\small\bfseries}}
+  \makeatother
+
+  % Define BibTeX command
+  \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+      T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+  % Don't print section numbers
+  \setcounter{secnumdepth}{0}
+
+
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Part 1 - Introduction}} \\
+\end{center}
+
+\section{\underline{1.1 Overview}}
+The goal of a survey is to provide information at an aggregate level for the population or for specific subgroups.
+
+\textbf{Advantages of sample surveys:}
+\begin{itemize}
+  \item Cheaper
+  \item Quicker
+  \item Better Quality Control
+\end{itemize}
+
+\textbf{Disadvantages of sample surveys:}
+\begin{itemize}
+  \item Introduce fluctuation due to sampling
+  \item Low accuracy (or no data) for small sub-populations
+\end{itemize}
+
+\textbf{Sample survey vs Census:}
+\begin{itemize}
+  \item Sample surveys provide up-to-date, broad level data
+  \item Censuses are good for providing detailed, but infrequent data. Information collected in a census can be used in the design of future surveys.
+\end{itemize}
+
+\textbf{Sampled population:}
+
+The population that we actually sample from due to practical constraints. (eg. households without telephones are excluded from telephone surveys) Hence, the sampled popuation is never 100\% of the targeted sample population.
+
+\textbf{Sampling frame:}
+
+A list, map, or other specifications of units in the population from which a sample may be selected. It may also contain additional information (eg. demographic information) that can be used to our advantage at both the sampling and estimation stage.
+
+\textbf{Pilot study:}
+
+A practice run on a small scale to see if the survey will run smoothly. This provides useful information about the variability of the population, adequacy of sampling frame, nonresponse rate to be expected, suitability of data collection method etc.
+
+\textbf{Note:}
+
+Tests like the chi-squared test assumes Simple Random Sampling (SRS). If sampling done is not SRS, adjustments have to be made.
+
+\vspace{75}
+
+\section{\underline{1.2 Questionnaire Design}}
+Design questions to be \textbf{reliable} and \textbf{valid} measures. Reliability is a necessary, but not sufficient, condition for validity.
+
+\textbf{Reliability:}
+\begin{itemize}
+  \item Repeatability of findings - a respondent will give the same answer if asked the same question within a short period of time under similar circumstances.
+  \item Consistency - 2 people with the same opinion should give the same answer so that differences in asnwers really correspond to differences in opinions.
+\end{itemize}
+
+\textbf{Validity:}
+
+Answers to questions are really measuring the underlying "truths", so that accurate inferences and interpretations can be made from the survey responses.
+
+\rule{1\linewidth}{0.25pt}
+
+\end{document}
