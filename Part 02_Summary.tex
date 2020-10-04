@@ -1,0 +1,660 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+\pdfinfo{
+  /Title (Part_02_Summary.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Khoo Wu Zhe Samuel)
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Part 2 - Simple Random Sampling}} \\
+\end{center}
+
+\section{\underline{2.1 Definitions}}
+\textbf{Probability sampling: }
+
+Samples are selected according to a specified probability distribution. Examples include SRS, stratified SRS, systematic sampling, cluster sampling etc.
+
+Main advantage: know what to expect under repeated sampling and as a result, sampling error can be assessed scientifically.
+
+\vspace{10}
+
+\textbf{Non-probability sampling: }
+
+Probability that a sample is selected is unknown and not controlled. Examples inlucde quota sampling, sampling by judgement or convenience, self-selection etc.
+
+\vspace{10}
+
+\textbf{Methods of drawing: }
+\begin{itemize}
+  \item Draw by draw \underline{with} replacement
+  \item Draw by draw \underline{without} replacement
+\end{itemize}
+
+There are $_{N}C_{n}=\frac{N(N-1)...(N-n+1)}{n!}= \frac{N!}{n!(N-n)!}=\binom nk$ possible samples of size n from a population of size N.
+
+\vspace{5}
+
+See Q1 of Tutorial 1 for proof that under draw by draw without replacement, each possible sample is equally likely to be selected.
+
+\vspace{10}
+
+\textbf{Simple Random Sampling (SRS): }
+
+Defined by the property that each of the $_{N}C_{n}$ possible samples is equally likely to be selected. SRS is one way to obtain draw by draw \underline{without} replacement.
+
+\underline{1st order inclusion probabilities: }
+\begin{itemize}
+  \item The sample requires that $i$ is in
+  \item For 1 \leq i \leq N, \\ \begin{center}$\pi_{i}=P$(unit i is selected)$ = \frac{_{N-1}C_{n-1}}{_{N}C{n}} = \frac{n}{N}$ \end{center}
+\end{itemize}
+
+\underline{2nd order inclusion probabilities: }
+\begin{itemize}
+  \item The sample requires that both $i$ and $j$ are in
+  \item For 1 \leq i \neq j \leq N, \\ \begin{center}$\pi_{ij}=P$(units $i$ and $j$ are selected)$ = \frac{_{N-2}C_{n-2}}{_{N}C{n}} = \frac{n(n-1)}{N(N-1)}$ \end{center}
+\end{itemize}
+\textbf{Note:} this is only for SRS without replacement. Inclusion probabilties for other sampling methods differ.
+
+\section{\underline{2.2 Sample Membership Indicators}}
+For $1 \leq i \leq N$, define $Z_{i}=$
+\begin{cases}
+      1 $ if unit $i$ is in the sample$\\
+      0 $ if unit $i$ is not in sample$
+\end{cases}
+
+\begin{equation}
+\begin{split}
+  E(Z_{i}) &=1*P(Z{i}=1)+0*P(Z_{i}=0)\\
+  &=P(Z_{i}=1)\\
+  &=\pi_{i} $\hspace{32} in general$\\
+  &= \frac{n}{N} $\hspace{30} for SRS$
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+  var(Z_{i}) &= E(Z^{2}_{i}) - E(Z_{i})^{2}\\
+  &= E(Z_{i}) - E(Z_{i})^{2}\\
+  &=\pi_{i}(1-\pi_{i}) $\hspace{33} in general$\\
+  &= \frac{n}{N}(1-\frac{n}{N}) $\hspace{30} for SRS$
+\end{split}
+\end{equation}
+
+For $i \neq j$,
+\begin{equation}
+\begin{split}
+  cov(Z_{i},Z_{j}) &= E(Z_{i}Z_{j}) - E(Z_{i})E(Z_{j})\\
+  &= \pi_{ij} - \pi_{i}\pi_{j} $\hspace{55} in general$\\
+  &= \frac{n(n-1)}{N(N-1)}-(\frac{n}{N})^{2}\\
+  &= \frac{-1}{N-1}(1-\frac{n}{N})\frac{n}{N} $\hspace{30} for SRS$
+\end{split}
+\end{equation}
+
+\section{\underline{2.3 Estimation of population mean}}
+\subsection{2.3.1 Notation}
+Let $y_{1}$,...,$y_{N}$ be the values of a variable of interest $y$ taken on by the $N$ units of the population.
+
+Let $Y$ be the $y$ value of a randomly picked unit from the population. (Note: $y_{1}$,...,$y_{N}$ are treated as fixed constants, randomness comes from sampling)
+
+\textbf{Population mean:} $\bar{y}_{U} = \frac{1}{N}\sum_{i=1}^{N}y_{i}=E(Y)$
+
+\vspace{5}
+
+\textbf{Population variance:} $\sigma^{2} = \frac{1}{N}\sum_{i=1}^{N}(y_{i}-\bar{y}_{U})^{2}=var(Y)$
+
+\vspace{5}
+
+\textbf{Adjusted Population variance:}
+\begin{center}
+$S^{2} = \frac{1}{N-1}\sum_{i=1}^{N}(y_{i}-\bar{y}_{U})^{2}=\frac{N}{N-1}\sigma^{2}$
+\end{center}
+
+Let \textbf{S} = $\{i_{1},...,i_{n}\}$ denote a simple random sample.
+
+\vspace{10}
+
+\textbf{Sample mean:} $\bar{y}=\frac{1}{n}\sum_{i\in \textbf{S}} y_{i}$
+
+Proof that $\bar{y}$ is an unbiased estimator:
+\begin{equation}
+\begin{split}
+  E(\bar{y}) &= \sum_{all \hspace{1} \textbf{S}} \bar{y}_{\textbf{S}}P(\textbf{S})\\
+  &= \sum_{all \hspace{1} \textbf{S}}\bar{y}_{\textbf{S}}\frac{1}{_{N}C_{n}}\\
+  &= \sum_{all \hspace{1} \textbf{S}}\frac{\sum y_{i}}{n}\frac{1}{_{N}C_{n}}\\
+  &= \bar{y}_{U}
+\end{split}
+\end{equation}
+
+\textbf{Sample variance:} $s^{2}=\frac{1}{n-1}\sum_{i\in \textbf{S}} (y_{i}-\bar{y})^{2}$
+
+\subsection{2.3.2 Mean and variance of sample mean under SRS}
+
+It is convenient to make use of sample membership indicator variables as it changes the randomness in $\bar{y}$ from the sample ($i\in\textbf{S}$) to a random variable $Z_{i}$. Hence,
+
+\begin{center}
+  $\bar{y}=\frac{1}{n}\sum^{N}_{i=1}y_{i}Z_{i}$
+\end{center}
+
+\textbf{Mean of Sample Mean: }
+
+\begin{equation}
+\begin{split}
+  E(\bar{y}) &= \frac{1}{n}\sum^{N}_{i=1}y_{i}E(Z_{i})\\
+  &= \frac{1}{n}\sum^{N}_{i=1}y_{i}\pi_{i}\\
+  &= \frac{1}{n}\sum^{N}_{i=1}y_{i}\frac{n}{N}\\
+  &= \bar{y}_{U}
+\end{split}
+\end{equation}
+
+This is an alternative proof that $\bar{y}$ is an unbiased estimator of $\bar{y}_{U}$.
+
+Note: $var(\bar{y}) = \frac{\sigma^{2}}{n}$ is only true for i.i.d. Draw \underline{with} replacement is i.i.d. but \underline{without} replacement isn't. Since SRS is drawing \underline{without} replacement, we need another formula for the variance of sample mean.
+
+\vspace{10}
+
+\textbf{Variance of Sample Mean:}
+
+\begin{equation}
+\begin{split}
+  var(\bar{y}) &= \frac{1}{n^{2}}\left\{\sum^{N}_{i=1}y_{i}^{2}var(Z_{i}) + \sum\sum_{i \neq j}y_{i}y_{j}cov(Z_{i}, Z_{j})\right\}\\
+  &=  \frac{1}{n^{2}}\left\{\sum^{N}_{i=1}y_{i}^{2}\frac{n}{N}(1-\frac{n}{N}) - \sum\sum_{i \neq j}y_{i}y_{j}\frac{n}{N}(1-\frac{n}{N})(\frac{1}{N-1})\right\}\\
+  &= (1-\frac{n}{N})\frac{1}{Nn}\left\{\sum^{N}_{i=1}y_{i}^{2} - \frac{1}{N-1}\sum\sum_{i \neq j}y_{i}y_{j}\right\}\\
+  &= (1-\frac{n}{N})\frac{1}{Nn}\{\sum^{N}_{i=1}y_{i}^{2} + \frac{1}{N-1}\sum^{N}_{i=1}y_{i}^{2} - \frac{1}{N-1}\sum^{N}_{i=1}y_{i}^{2}\\
+  & \hspace{10} - \frac{1}{N-1}\sum\sum_{i \neq j}y_{i}y_{j}\}\\
+  &= (1-\frac{n}{N})\frac{1}{Nn}\left\{\frac{N}{N-1}\sum^{N}_{i=1}y_{i}^{2} - \frac{1}{N-1}(\sum^{N}_{i=1}y_{i})^{2}\right\}\\
+  &= (1-\frac{n}{N})\frac{1}{n}\frac{1}{N-1}\left\{\sum^{N}_{i=1}y_{i}^{2} - N\bar{y}_{U}^{2}\right\}\\
+  &= (1-\frac{n}{N})\frac{1}{n}S^{2}\\
+  &= (\frac{1}{n}-\frac{1}{N})S^{2}
+\end{split}
+\end{equation}
+
+This is known as the basic variance formula for SRS. Note that it is a decreasing function of n. This makes sense as with more data collected, the variance should decrease.
+
+\vspace{20}
+
+\textbf{Unbiased estimator of $var(\bar{y})$:} $\hat{V}(\bar{y}) = (1-\frac{n}{N})\frac{1}{n}s^{2}$
+
+$(1-\frac{n}{N})$ is known as the \textbf{finite population correction factor (fpc)}. It can be ignored if the sampling fraction $\frac{n}{N}$ is small.
+
+\textbf{For large populations, it is the size of the sample taken, not the percentage of the population sampled, that determines the precision of the estimator.} For example, assuming same $S^{2}$, $var(\bar{y})$ of a sample of size 100 from a population of size 100,000,000 is almost the same as $var(\bar{y})$ of a sample of size 100 from a population of size 10,000 (sub into the formula to check!).
+
+\vspace{10}
+
+\textbf{Proof that sample variance is an unbiased estimator of adjusted population variance: }
+
+\begin{equation}
+\begin{split}
+  E(s^{2}) &= \frac{n}{n-1}\left\{E(\frac{1}{n}\sum_{i \in \textbf{S}}y_{i}^{2}) - E(\bar{y}^{2})\right\}\\
+  &= \frac{n}{n-1}\left\{\frac{1}{N}\sum_{i = 1}^{N}y_{i}^{2} - var(\bar{y}) - (E(\bar{y}))^{2}\right\}\\
+  &= \frac{n}{n-1}\left\{\frac{1}{N}\sum_{i = 1}^{N}y_{i}^{2} - \bar{y}_{U}^{2} - s^{2}(\frac{1}{n}-\frac{1}{N})\right\}\\
+  &= \frac{n}{n-1}\left\{\frac{\sum_{i = 1}^{N}y_{i}^{2} - N\bar{y}_{U}^{2}}{N} - s^{2}(\frac{1}{n}-\frac{1}{N})\right\}\\
+  &= \frac{n}{n-1}\left\{\frac{N-1}{N}s^{2} - s^{2}(\frac{1}{n}-\frac{1}{N})\right\}\\
+  &= S^{2}
+\end{split}
+\end{equation}
+
+\textbf{Estimated Standard Error of $\bar{y}$: }
+
+$SE(\bar{y}) = \sqrt{\hat{V}(\bar{y})} = \sqrt{(1-\frac{n}{N})\frac{1}{n}s^{2}}$
+
+This can be done by replacing $S^{2}$ by sample variance $s^{2}$ in $var(\bar{y})$ and square rooting it.
+
+\subsection{2.3.3 Finite population Central Limit Theorem}
+
+If the sample size $n$ is large, then $\frac{\bar{y}-\bar{y}_{U}}{SE(\bar{y})}$ has approximately a N(0,1) distribution under certain conditions.
+
+\vspace{10}
+
+\textbf{How large should n be for the normal approximation to hold?}
+
+It depends on how skewed the population is.
+
+\begin{center}
+  $n_{min} = 28 + 25\kappa^{2}$
+\end{center}
+where
+\begin{center}
+  $\kappa = \frac{\sum^{N}_{i=1}(y_{i}-\bar{y}_{U})^{3}}{NS^{3}}$
+\end{center}
+is the skewness of the finite population.
+
+For small $n$, a better approximation is given by the $t_{n-1}$ distribution.
+
+Note: As degree of freedom increases, t distribution tends to normal.
+
+\subsection{2.3.4 Confidence intervals for population mean}
+
+Since $\frac{\bar{y}-\bar{y}_{U}}{SE(\bar{y})}$ is approximately standard normal for large n, an approx $100(1-\alpha)\%$ CI for $\bar{y}_{U}$ is:
+\begin{center}
+  $(\bar{y} - z_{\alpha/2} SE(\bar{y}), \bar{y} + z_{\alpha/2} SE(\bar{y}))$
+\end{center}
+where $z_{\alpha/2}$ is the upper $(\alpha/2)^{th}$ quantile of a standard normal distribution.
+
+For smaller samples, it is advisable to replace $z_{\alpha/2}$ by $t_{\alpha/2,n-1}$ to produce a wider CI.
+
+\subsection{2.3.5 The meaning of confidence intervals}
+
+If we compute a 95\% confidence interval from each sample for a large number of samples; then about 95\% of the intervals will contain the true value.
+
+\section{\underline{2.4 Estimation of population total}}
+Let $t = y_{1} + ... + y_{N} = N\bar{y}_{U}$ denote the population total of variable y.
+
+Since $\bar{y}$ estimates $\bar{y}_{U}$,
+
+\begin{center}
+  $\hat{t} = N\bar{y}$ estimates $t = N\bar{y}_{U}$
+\end{center}
+Hence, $SE(\hat{t}) = N(SE(\bar{y}))$ and an approximate 95\% CI for $t$ can be found by multiplying $N$ to a 95\% CI for $\bar{y}_{U}$. (see section 2.3.4)
+
+\begin{itemize}
+  \item $\hat{t} = N\bar{y}$ is sometimes called the number-raised estimator
+  \item $\hat{t} = N\bar{y} = \sum_{i\in \textbf{S}} \frac{N}{n} y_{i}$ Hence, each unit in the sample represents $\frac{N}{n}$ units in the population, including itself.
+  \item $\frac{N}{n}$ is also called the apparent frequency, or sampling weight
+\end{itemize}
+
+\textbf{Sampling weight:}
+\begin{equation}
+\begin{split}
+  w_{i} &= \frac{1}{\pi_{i}} $\hspace{10} in general$\\
+  &= \frac{1}{n/N} $\hspace{10} for SRS$
+\end{split}
+\end{equation}
+
+\section{\underline{2.5 Estimation of population proportion}}
+Let $p$ denote the proportion of population units having a certain characteristic. Define an indicator variable
+
+\begin{equation}
+\begin{split}
+  y_{i} &= 1 $\hspace{10} if unit i has the characteristic,$ \\
+  &= 0 $\hspace{10} if not$
+\end{split}
+\end{equation}
+then the population mean $\bar{y}_{U}$ of the indicator variable is $p$, and the problem reduces to a special case of estimating a population mean like in section 2.3.
+
+\begin{itemize}
+  \item $p = \bar{y}_{U}$ can be estimated by $\bar{y} = \hat{p}$, the sample proportion.
+  \item $E(\hat{p}) = E(\bar{y}) = \bar{y}_{U}$ shows that the sample proportion is unbiased.
+\end{itemize}
+
+\textbf{Adjusted Population variance:}
+
+\begin{equation}
+\begin{split}
+$S^{2} &= \frac{1}{N-1}\sum_{i=1}^{N}(y_{i}^{2}-N\bar{y}_{U}^{2})\\
+ &= \frac{1}{N-1}\sum_{i=1}^{N}(y_{i}-Np^{2}) \\
+ &= \frac{Np(1-p)}{N-1}$
+\end{split}
+\end{equation}
+
+\textbf{Sample variance:} $s^{2} = \frac{1}{n-1}n\hat{p}(1-\hat{p})$
+
+\textbf{Variance of sample proportion: }
+
+Sub (10) into (6),
+
+\begin{center}
+$var(\hat{p}) = (1 - \frac{n}{N})\frac{1}{n}\frac{N}{N-1}p(1-p)$
+\end{center}
+\textbf{Unbiased estimator of $var(\hat{p})$:}
+
+Sub sample variance into unbiased estimator of $var(\bar{y})$,
+
+\begin{equation}
+\begin{split}
+  \hat{V}(\hat{p}) &= (1 - \frac{n}{N})\frac{1}{n}\frac{n}{n-1}\hat{p}(1-\hat{p}) \\
+  &= (1 - \frac{n}{N})\frac{1}{n-1}\hat{p}(1-\hat{p})
+\end{split}
+\end{equation}
+
+\textbf{Estimated Standard Error of $\hat{p}$:}
+\begin{center}
+  $SE(\hat{p}) = \sqrt{\hat{V}(\hat{p})} = \sqrt{(1-\frac{n}{N})\frac{1}{n-1}\hat{p}(1-\hat{p})}$
+\end{center}
+
+Approx $100(1-\alpha)\%$ CI for $p$:
+\begin{center}
+  $(\hat{p} - z_{\alpha/2} SE(\hat{p}), \hat{p} + z_{\alpha/2} SE(\hat{p}))$
+\end{center}
+
+\section{\underline{2.6 Sample size determination}}
+
+\textbf{How large a simple random sample should one take to ensure that $P(|\bar{y}-\bar{y}_{U}| \leq e) = 1- \alpha$, where $e$ is some prespecified margin of error?}
+
+\begin{equation}
+\begin{split}
+  P(|\bar{y}-\bar{y}_{U}| \le e) &= P \left(\left|\frac{\bar{y}-\bar{y}_{U}}{\sqrt{var(\bar{y})}}\right| \leq \frac{e}{\sqrt{var(\bar{y})}}\right) \\
+  &\approx P \left(|Z| \leq \frac{e}{\sqrt{var(\bar{y})}}\right) $\hspace{10} where Z \sim N(0,1)$
+\end{split}
+\end{equation}
+
+Hence,
+\begin{center}
+$P(|\bar{y}-\bar{y}_{U}| \le e) = 1- \alpha$ if $\frac{e}{\sqrt{var(\bar{y})}} = z_{\alpha/2}$
+\end{center}
+and
+\begin{center}
+$var(\bar{y}) = (1-\frac{n}{N})\frac{1}{n}S^{2} = \left(\frac{e}{z_{\alpha/2}}\right)^{2}$
+\end{center}
+
+Solving for $n$ yields
+\begin{equation}
+  n = \frac{1}{\left(\frac{e}{z_{\alpha/2}}\right)^{2} + \frac{S^{2}}{N}}S^{2}
+\end{equation}
+
+To use (13), we need a preliminary estimate of the population variance $S^{2}$ which can be obtained by past data from the same/similar population, a pilot study, a 2-step sampling procedure, guessing or bracketing. We cannot replace $S^{2}$ by sample variance as we are trying to determine the sample size. We have not gotten the sample yet!
+
+\textbf{Note:} Assuming $N$ is large, we can ignore the term $\frac{S^{2}}{N}$
+
+\vspace{10}
+
+\textbf{How large a simple random sample should one choose to ensure that the \textit{relative error} $\left|\frac{\bar{y}-\bar{y}_{U}}{\bar{y}_{U}}\right|$ is within a prespecified limit $r$ with probability $1-\alpha$?}
+
+\vspace{10}
+
+Since $\left|\frac{\bar{y}-\bar{y}_{U}}{\bar{y}_{U}}\right| \leq r$ iff $|\bar{y}-\bar{y}_{U}| \leq r\bar{y}_{U}$,
+
+use (13) with $e = r\bar{y}_{U}$ to get
+\begin{equation}
+  n = \frac{S^{2}}{\left(\frac{r\bar{y}_{U}}{z_{\alpha/2}}\right)^{2} + \frac{S^{2}}{N}} = \frac{(CV)^{2}}{\left(\frac{r}{z_{\alpha/2}}\right)^{2} + \frac{(CV)^{2}}{N}}
+\end{equation}
+
+it is similar to (13) but with S replaced by the coefficient of variation $CV = \frac{S}{\bar{y}_{u}}$. To apply (14), we need an estimate of CV.
+
+\vspace{10}
+
+\textbf{Sample size determination for estimating a proportion}
+
+Since a proportion is just the mean of an indicator variable, (13) and (14) remain applicable.
+\begin{equation}
+  S^{2} = \frac{N}{N-1}p(1-p)
+\end{equation}
+and
+\begin{equation}
+  (CV)^{2} = \frac{N}{N-1}\frac{1-p}{p}
+\end{equation}
+
+\begin{itemize}
+  \item For controlling error $|\hat{p} - p|$, (15) is appropriate. Note that $S^{2}$ is bounded above by $\frac{0.25N}{N-1}$. By using the max value of $S^{2}$, we obtain a conservative estimate of the required sample size and there is no need for a preliminary estimate of $S^{2}$.
+  \item For controlling \textit{relative} error, (16) is appropriate. If $p$ is bounded away from zero, CV will have a max which can be used to obtain a conservative estimate of $n$. (sub min $p$ to get max CV)
+  \item For explanation of why controlling/relative error is smaller, see Q2 of Assignment 1.
+\end{itemize}
+
+\vspace{10}
+
+\textbf{Note:} The above sample size determination is on the simplistic side (only for SRS). In practice, we have to account for:
+\begin{itemize}
+  \item sampling method used
+  \item estimator to be employed
+  \item multi-variate nature of a survey
+  \item multi-purpose nature of a survey (certain aim/accuracy to achieve)
+  \item non-response
+\end{itemize}
+
+\section{\underline{2.7 Sample means of 2 variables}}
+
+Let $\bar{x}$ and $\bar{y}$ be the sample means of variables $x$ and $y$. Their individual mean and variance under SRS follows that of section 2.3.2.
+
+\textbf{Covariance between $\bar{x}$ and $\bar{y}$:}
+\begin{equation}
+  cov(\bar{x}, \bar{y}) = \left(1-\frac{n}{N}\right)\frac{S_{xy}}{n}
+\end{equation}
+where
+\begin{equation}
+  S_{xy} = \frac{\sum^{N}_{i=1}(x_{i}-\bar{x}_{U})(y_{i}-\bar{y}_{U})}{N-1}
+\end{equation}
+
+See Q1 of Tutorial 2 for the proof.
+
+\vspace{10}
+
+\textbf{Bivariate Central Limit Theorem:}
+
+For large sample size, $(\bar{x}, \bar{y})$ is approximately distributed like a bivariate normal distribution with mean vector $(\bar{x}_{U}, \bar{y}_{U})$ and variance-covariance matrix
+\begin{equation}
+  \left(1-\frac{n}{N}\right)\frac{1}{n}
+  \left(
+  \begin{array}{cc}
+    S_{x}^{2} & S_{xy} \\
+    S_{xy} & S_{y}^{2}
+  \end{array}
+  \right)
+\end{equation}
+
+In practice, $S_{x}^{2}$, $S_{y}^{2}$ and $S_{xy}$ are unknown and will be replaced by their sample versions $s_{x}^{2}$, $s_{y}^{2}$ and $s_{xy}$.
+
+\section{\underline{2.8 Estimation of the ratio of two totals}}
+
+Let $x$ and $y$ be two survey variables, sometimes we are interested in estimating
+\begin{equation}
+  B = \frac{y_{1} + ... + y_{N}}{x_{1} + ... + x_{N}} = \frac{t_{y}}{t_{x}} = \frac{\bar{y}_{U}}{\bar{x}_{U}}
+\end{equation}
+
+An estimator of B is
+\begin{equation}
+  \hat{B} = \frac{\hat{t}_{y}}{\hat{t}_{x}} = \frac{\bar{y}}{\bar{x}}= \frac{\sum_{i \in \textbf{S}}y_{i}}{\sum_{i \in \textbf{S}}x_{i}}
+\end{equation}
+This is also known as the sample ratio.
+
+\subsection{Approximate distribution of $\hat{B}$:}
+
+Consider:
+
+\begin{equation}
+\begin{split}
+  \hat{B}-{B} &= \frac{\bar{y}-B\bar{x}}{\bar{x}} \\
+  &= \frac{\bar{y}-B\bar{x}}{\bar{x}_{U}} \left(\frac{\bar{x}_{U}}{\bar{x}}-1+1\right) \\
+  &= \frac{\bar{y}-B\bar{x}}{\bar{x}_{U}} + \frac{\bar{y}-B\bar{x}}{\bar{x}_{U}}\left(\frac{\bar{x}_{U}}{\bar{x}}-1\right) \\
+  &\approx \frac{\bar{y}-B\bar{x}}{\bar{x}_{U}} $\hspace{10} since $\left(\frac{\bar{x}_{U}}{\bar{x}}-1\right)$ goes to 0$
+\end{split}
+\end{equation}
+
+Define $e_{i} = y_{i} - Bx_{i}$, then
+\begin{equation}
+  \hat{B}-{B} \approx \frac{\bar{e}}{\bar{x}_{U}}
+\end{equation}
+
+Since $\bar{e}$ is a sample mean, we can make use of section 2.3.2,
+
+\begin{equation}
+\begin{split}
+  E(\bar{e}) &= \bar{e}_{U} \\
+  &= \bar{y}_{U} - B\bar{x}_{U} \\
+  &= \bar{y}_{U} - \frac{\bar{y}_{U}}{\bar{x}_{U}}\bar{x}_{U} \\
+  &= 0
+\end{split}
+\end{equation}
+
+and
+\begin{equation}
+\begin{split}
+  var(\bar{e}) &= \left(1 - \frac{n}{N}\right)\frac{1}{n}S^{2}_{e} \\
+  &= \left(1-\frac{n}{N}\right)\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}(e_{i}-\bar{e}_{U})^{2} \\
+  &= \left(1-\frac{n}{N}\right)\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}(y_{i}-Bx_{i} - 0)^{2} \\
+  &= \left(1-\frac{n}{N}\right)\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}(y_{i}-Bx_{i})^{2}
+\end{split}
+\end{equation}
+
+Hence,
+
+\begin{equation}
+\begin{split}
+  E(\hat{B}) &\approx E(B) + \frac{E(\bar{e})}{E(\bar{x}_{U})} \\
+  &\approx B $\hspace{10} (approximately unbiased)$
+\end{split}
+\end{equation}
+
+and
+
+\begin{equation}
+  \begin{split}
+    var(\hat{B}) &\approx \frac{1}{\bar{x}_{U}^{2}}var(\bar{e}) \\
+    &= \frac{1}{\bar{x}_{U}^{2}}\left(1-\frac{n}{N}\right)\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}(y_{i}-    Bx_{i})^{2} $\hspace{10} [1]$ \\
+    &= \frac{1}{\bar{x}_{U}^{2}}\left(1-\frac{n}{N}\right)\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}\left\{(y_{i}-\bar{y}_{U}) - B(x_{i}-\bar{x}_{U})\right\}^{2} \\
+    &= \frac{1}{\bar{x}_{U}^{2}}\left(1-\frac{n}{N}\right)\frac{1}{n}\left(S_{y}^{2} - 2BS_{xy} + B^{2}S{x}^{2}\right) $\hspace{10} [2]$
+  \end{split}
+\end{equation}
+
+There are two ways of expression.
+
+\vspace{10}
+
+\textbf{Estimated variance of $\hat{B}$:}
+\begin{equation}
+  \begin{split}
+    \hat{V}(\hat{B}) &= \frac{1}{\bar{x}^{2}}\left(1-\frac{n}{N}\right)\frac{1}{n}\frac{1}{n-1}\sum_{i \in \textbf{S}}(y_{i} - \hat{B}x_{i})^{2} $\hspace{10} [1]$ \\
+    &= \frac{1}{\bar{x}^{2}}\left(1-\frac{n}{N}\right)\frac{1}{n}\frac{1}{n-1}\left\{\sum_{i \in \textbf{S}}y_{i}^{2} - 2\hat{B}\sum_{i \in \textbf{S}} x_{i}y_{i} + \hat{B}^{2}\sum_{i \in \textbf{S}}x_{i}^{2} \right\} \\
+    &= \frac{1}{\bar{x}^{2}}\left(1-\frac{n}{N}\right)\frac{1}{n}\left(s_{y}^{2} - 2\hat{B}s_{xy} + \hat{B}^{2}s^{2}_{x}\right)
+  \end{split}
+\end{equation}
+
+\textbf{Approx $100(1-\alpha)\%$ CI for B:}
+\begin{center}
+  $(\hat{B}-z_{\alpha/2}SE(\hat{B}), \hat{B} + z_{\alpha/2}SE(\hat{B}))$
+\end{center}
+where $SE(\hat{B}) = \sqrt{\hat{V}(\hat{B})}$
+
+\section{\underline{Basic knowledge:}}
+
+\subsection{Properties of variance:}
+\begin{equation}
+  \begin{split}
+    var(X) &= E[(X-E[X])^{2}] \\
+    &= E[X^{2}] - (E[X])^{2}
+  \end{split}
+\end{equation}
+
+Hence, $var(\bar{x}) = E[(\bar{x}-\bar{x}_{U})^{2}]$
+
+\vspace{10}
+
+$var(aX+b) = a^{2}var(X)$
+
+\vspace{10}
+
+$var(\sum a_{i}X_{i} + b) = \sum a_{i}^{2}var(X_{i}) + 2\sum\sum a_{i}a_{j}cov(X_{i},X_{j})$
+
+\vspace{10}
+
+$var(aX + bY) = a^{2}var(X) + 2abcov(X,Y) + b^{2}var(Y)$
+
+\vspace{10}
+
+$var(aX - bY) = a^{2}var(X) - 2abcov(X,Y) + b^{2}var(Y)$
+
+\subsection{Properties of covariance:}
+\begin{equation}
+  \begin{split}
+    cov(X,Y) &= E[(X-E[X])(Y-E[Y])] \\
+    &= E[XY] - E[X]E[Y]
+  \end{split}
+\end{equation}
+
+Hence, $cov(\bar{x}, \bar{y}) = E[(\bar{x}-\bar{x}_{U})(\bar{y}-\bar{y}_{U})]$
+
+\begin{itemize}
+  \item $cov(X,Y) = cov(Y,X)$
+  \item $cov(X,X) = var(X)$
+  \item $cov(X,a) = 0$
+  \item $cov(aX,Y) = acov(X,Y)$
+  \item $cov(X+Y,Z) = cov(X,Z) + cov(Y,Z)$
+\end{itemize}
+
+\subsection{Bias:}
+
+\begin{center}
+  $Bias(\bar{y}) = E(\bar{y}) - \bar{y}_{U}$
+\end{center}
+
+\subsection{Mean Squared Error:}
+
+\begin{center}
+  $MSE(\bar{y}) = V(\bar{y}) + [Bias(\bar{y})]^{2}$
+\end{center}
+
+\subsection{Common Z scores}
+
+\begin{center}
+\begin{tabular}{ |c|c| }
+ \hline
+ Confidence level & Z score \\
+ \hline
+ 90\% & 1.645 \\
+ 95\% & 1.960 \\
+ 98\% & 2.326 \\
+ 99\% & 2.576 \\
+ \hline
+\end{tabular}
+\end{center}
+
+\rule{1\linewidth}{0.25pt}
+
+\end{document}
