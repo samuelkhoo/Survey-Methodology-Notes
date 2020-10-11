@@ -1,0 +1,777 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+\pdfinfo{
+  /Title (Part_03_Summary.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Khoo Wu Zhe Samuel)
+  /Subject (Survey Methodology)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Part 3 - Use of Auxiliary Information}} \\
+     \Large{\underline{In Estimation}}
+\end{center}
+
+When conducting a sample survey, it is often the case that there is an auxiliary variable $x$ satisfying the following 2 requirements:
+\begin{enumerate}
+  \item the value of $x$ is known for all members of the population, or at least their mean $\bar{x}_{U}$ are known.
+  \item $x$ is positively correlated with the variable of interest $y$.
+\end{enumerate}
+
+Aim of this chapter is to incorporate auxiliary information with sample information to result in better estimators.
+
+\vspace{5}
+
+\textbf{Naive estimator:} an estimator that does not make use of $x$.
+
+\vspace{10}
+
+\section{\underline{3.1 Ratio estimators}}
+
+Suppose we want to estimate the population mean $\bar{y}_{U}$, or the population total $t_{y} = N\bar{y}_{U}$ of the variable of interest $y$, and $x$ is an auxiliary variable. To make use of the auxiliary information, we rewrite $\bar{y}_{U}$ as
+
+\begin{center}
+  $\bar{y}_{U} = B\bar{x}_{U}$, where $B = \frac{\bar{y}_{U}}{\bar{x}_{U}}$ and $\bar{x}_{U}$ is \underline{known}
+\end{center}
+
+\textbf{Ratio estimator of the ratio B:}
+
+From section 2.8, $\hat{B}$ estimates B, where
+\begin{center}
+  $\hat{B} = \frac{\bar{y}}{\bar{x}}$
+\end{center}
+
+\textbf{Ratio estimator of the mean $\bar{y}_{U}$:}
+\begin{center}
+  $\hat{\bar{y}}_{r} = \hat{B}\bar{x}_{U}$
+\end{center}
+
+\textbf{Ratio estimator of the total $t_{y}$:}
+\begin{center}
+  $\hat{t}_{yr} = N\hat{\bar{y}}_{r} = N\hat{B}\bar{x}_{U}$
+\end{center}
+
+\textbf{Note:}
+\begin{itemize}
+  \item $\hat{\bar{y}}_{r} = \hat{B}\bar{x}_{U}$ and $\hat{t}_{yr} = N\hat{B}\bar{x}_{U}$ are defined only when auxiliary information in the form of $\bar{x}_{U}$ is known.
+  \item the 3 estimators differ only by a multiplicative constant.
+\end{itemize}
+
+\subsection{Variance formulae for ratio estimators:}
+Refer to section 2.8 for derivation.
+
+\vspace{10}
+
+\textbf{Variance of $\hat{B}$:}
+
+\vspace{5}
+
+$V(\hat{B}) \approx \frac{1}{\bar{x}_{U}^{2}}(1-\frac{n}{N})\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}(y_{i}-Bx_{i})^{2}$
+
+\vspace{5}
+
+$\hat{V}(\hat{B}) \approx \frac{1}{\bar{x}^{2}}(1-\frac{n}{N})\frac{1}{n}\frac{1}{n-1}\sum_{i\in \textbf{S}}(y_{i}-\hat{B}x_{i})^{2}$
+
+\vspace{5}
+
+\textbf{Variance of $\hat{\bar{y}}_{r}$:}
+
+\vspace{5}
+
+$V(\hat{\bar{y}}_{r}) = \bar{x}_{U}^{2}V(\hat{B})$
+
+\hspace{25} $\approx (1-\frac{n}{N})\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}(y_{i}-Bx_{i})^{2}$
+
+\vspace{5}
+
+$\hat{V}(\hat{\bar{y}}_{r}) = \bar{x}_{U}^{2}\hat{V}(\hat{B})$
+
+\vspace{5}
+
+\hspace{25} $\approx (\frac{\bar{x}_{U}}{\bar{x}})^{2}(1-\frac{n}{N})\frac{1}{n}\frac{1}{n-1}\sum_{i\in \textbf{S}}(y_{i}-\hat{B}x_{i})^{2}$
+
+\vspace{5}
+
+\textbf{Variance of $\hat{t}_{yr}$:}
+
+\vspace{5}
+
+$V(\hat{t}_{yr}) = N^{2}\bar{x}_{U}^{2}V(\hat{B})$
+
+\vspace{5}
+
+\hspace{25} $\approx N^{2}(1-\frac{n}{N})\frac{1}{n}\frac{1}{N-1}\sum^{N}_{i=1}(y_{i}-Bx_{i})^{2}$
+
+\vspace{5}
+
+$\hat{V}(\hat{t}_{yr}) = N^{2}\bar{x}_{U}^{2}\hat{V}(\hat{B})$
+
+\vspace{5}
+
+\hspace{25} $\approx N^{2}(\frac{\bar{x}_{U}}{\bar{x}})^{2}(1-\frac{n}{N})\frac{1}{n}\frac{1}{n-1}\sum_{i\in\textbf{S}}(y_{i}-\hat{B}x_{i})^{2}$
+
+\vspace{10}
+
+\section{\underline{3.2 Regression estimators}}
+
+\subsection{Least Squares Line:}
+\begin{center}
+  $y = \hat{B}_{0} + \hat{B}_{1}x = \bar{y} + \hat{B}_{1}(x-\hat{x})$
+\end{center}
+
+where
+
+\begin{equation}
+  \hat{B}_{1} = \frac{\sum_{i\in \textbf{S}}(x_{i}-\bar{x})(y_{i}-\bar{y})}{\sum_{i\in \textbf{S}}(x_{i}-\bar{x})^{2}}
+  = \frac{s_{xy}}{s_{x}^{2}}
+\end{equation}
+
+and
+
+\begin{equation}
+  s_{xy} = \frac{\sum_{i\in \textbf{S}}(x_{i}-\bar{x})(y_{i}-\bar{y})}{n-1}, \hspace{10}
+  s_{x}^{2} = \frac{\sum_{i\in \textbf{S}}(x_{i}-\bar{x})^{2}}{n-1}
+\end{equation}
+
+\begin{itemize}
+  \item $s_{xy}$: the sample covariance between $x$ and $y$
+  \item $s_{x}^{2}$: sample variance of $x$
+\end{itemize}
+
+According to the least squares line, when $x = \bar{x}_{U}$,
+\begin{center}
+  $y = \bar{y} + \hat{B}_{1}(\bar{x}_{U} - \bar{x}) = \hat{\bar{y}}_{reg}$
+\end{center}
+
+$\hat{\bar{y}}_{reg}$: regression estimator of population mean $\bar{y}_{U}$
+
+\vspace{5}
+
+\textbf{Shorter formulae:}
+\begin{itemize}
+  \item $s_{xy} = \frac{1}{n-1}(\sum_{i\in \textbf{S}}x_{i}y_{i} - \frac{1}{n}\sum_{i\in \textbf{S}}x_{i}\sum_{i\in \textbf{S}}y_{i})$
+  \item $s_{x}^{2} = \frac{1}{n-1}(\sum_{i\in \textbf{S}}x_{i}^{2} - \frac{1}{n}(\sum_{i\in \textbf{S}}x_{i})^{2})$
+  \item $s_{y}^{2} = \frac{1}{n-1}(\sum_{i\in \textbf{S}}y_{i}^{2} - \frac{1}{n}(\sum_{i\in \textbf{S}}y_{i})^{2})$
+\end{itemize}
+
+
+\vspace{10}
+
+\subsection{Approximate variance of $\hat{\bar{y}}_{reg}$:}
+
+Consider the following approximation:
+
+\begin{equation}
+  \begin{split}
+    \hat{\bar{y}}_{reg} &= \bar{y} + \hat{B}_{1}(\bar{x}_{U}-\bar{x}) \\
+    &\approx \bar{y} + B_{1}(\bar{x}_{U} - \bar{x}) \\
+    &= \bar{z}
+  \end{split}
+\end{equation}
+
+where
+
+\begin{equation}
+  B_{1} = \frac{\sum_{i=1}^{N}(x_{i}-\bar{x}_{U})(y_{i}-\bar{y}_{U})}{\sum_{i=1}_{N}(x_{i}-\bar{x}_{U})^{2}}
+  = \frac{S_{xy}}{S_{x}^{2}}
+\end{equation}
+
+\begin{itemize}
+  \item $B_{1}$: the "population" version of $\hat{B}_{1}$. It is a constant.
+  \item $\bar{z}$: sample mean of $z_{i} = y_{i} + B_{1}(\bar{x}_{U} - x_{i})$
+\end{itemize}
+
+$\hat{\bar{y}}_{reg}$ is approximately unbiased:
+\begin{center}
+  $E(\hat{\bar{y}}_{reg}) \approx E(\bar{z}) = \bar{z}_{U} = \bar{y}_{U}$
+\end{center}
+
+Since $\hat{\bar{y}}_{reg}$ is approximately the samlpe mean of a suitably defined variable, we can apply the basic variance formula (equation 8 in Part 2):
+
+\begin{center}
+  $V(\hat{\bar{y}}_{reg}) \approx V(\bar{z}) = (1-\frac{n}{N})\frac{1}{n}S_{z}^{2}$
+\end{center}
+
+where
+
+\begin{equation}
+  \begin{split}
+    S_{z}^{2} &= \frac{\sum^{N}_{i-1}(z_{i}-\bar{z}_{U})^{2}}{N-1} \\
+    &= \frac{\sum^{N}_{i-1}\left\{(y_{i}-\bar{y}_{U}) - B_{1}(x_{i}-\bar{x}_{U})\right\}^{2}}{N-1} \\
+    &= S_{y}^{2} - 2B_{1}S_{xy} + B_{1}^{2}S_{x}^{2}
+  \end{split}
+\end{equation}
+
+Using (4),
+
+\begin{equation}
+  \begin{split}
+    B_{1}S_{xy} &= B_{1}^{2}S_{x}^{2} \\
+    &= \frac{S_{xy}^{2}}{S_{x}^{2}} \\
+    &= S_{y}^{2}\frac{S_{xy}^{2}}{S_{x}^{2}S_{y}^{2}} \\
+    &= S_{y}^{2}R^{2}
+  \end{split}
+\end{equation}
+
+where $R = \frac{S_{xy}}{S_{x}S_{y}}$ is the correlation between $x$ and $y$ in the finite population.
+
+\vspace{5}
+
+Hence,
+
+\begin{equation}
+  \begin{split}
+    V(\hat{\bar{y}}_{reg}) &\approx (1-\frac{n}{N})\frac{1}{n}S_{z}^{2} \\
+    &= (1-\frac{n}{N})\frac{1}{n}S_{y}^{2}(1-R^{2}) \hspace{10} \leq V(\bar{y})
+  \end{split}
+\end{equation}
+
+The higher the correlation, the smaller $(1-R^{2})$ is.
+
+\vspace{5}
+
+Replacing R by the sample correlation $r = \frac{s_{xy}}{s_{x}s_{y}}$ and $S_{y}^{2}$ by the sample variance $s_{y}^{2}$, we obtain the estimated variance:
+
+\begin{center}
+  $\hat{V}(\hat{\bar{y}}_{reg}) = (1-\frac{n}{N})\frac{1}{n}s_{y}^{2}(1-r^{2})$
+\end{center}
+
+\subsection{To estimate the total $t_{y}$:}
+\begin{itemize}
+  \item $\hat{t}_{yreg} = N\hat{\bar{y}}_{reg}$
+  \item $V(\hat{t}_{yreg}) = N^{2}V(\hat{\bar{y}}_{reg})$
+  \item $\hat{V}(\hat{t}_{yreg}) = N^{2}\hat{V}(\hat{\bar{y}}_{reg})$
+\end{itemize}
+
+\section{\underline{3.3 Difference estimator}}
+Intuition behind ratio estimator:
+\begin{center}
+  $\frac{\bar{y}_{U}}{\bar{y}} \approx \frac{\bar{x}_{U}}{\bar{x}}$ (exact if $y_{i} = cx_{i}$ for all $i$)
+\end{center}
+
+Intuition behind difference estimator:
+\begin{center}
+  $\bar{y}_{U} - \bar{y} \approx c(\bar{x}_{U} - \bar{x})$
+\end{center}
+
+Hence,
+\begin{center}
+  $\hat{\bar{y}}_{diff} = \bar{y} + c(\bar{x}_{U} - \bar{x}) = \bar{z}$
+\end{center}
+
+Under SRS,
+\begin{center}
+  $E(\hat{\bar{y}}_{diff}) = \bar{y}_{U}$ and $V(\hat{\bar{y}}_{diff}) = V(\bar{z})$
+\end{center}
+
+where $z_{i} = y_{i} + c(\bar{x}_{U} - x_{i})$
+
+\subsection{Variance of $\hat{\bar{y}}_{diff}$:}
+
+\vspace{10}
+
+\begin{equation}
+  \begin{split}
+    V(\hat{\bar{y}}_{diff}) &= V(\bar{z}) \\
+    &= (1-\frac{n}{N})\frac{1}{n}S^{2}_{z} \\
+    &= (1-\frac{n}{N})\frac{1}{n}\{S_{y}^{2} - 2cS_{xy} + c^{2}S_{x}^{2}\}
+  \end{split}
+\end{equation}
+
+To minimise variance, differentiate $V$ w.r.t. $c$ and set derivative to 0:
+
+\begin{center}
+  $c_{opt} = \frac{S_{xy}}{S_{x}^{2}} = B_{1}$
+\end{center}
+
+Unfortunately, $B_{1}$ is unknown. We have to estimate $c_{opt}$ by $\hat{B}_{1} = \frac{s_{xy}}{s_{x}^{2}}$. Substituting $c$ with $\hat{c}_{opt} = \hat{B}_{1}$ in the difference estimator,
+
+\begin{center}
+  $\bar{y} + \hat{c}_{opt}(\bar{x}_{U} - \bar{x}) = \bar{y} + \hat{B}_{1}(\bar{x}_{U} - \bar{x}) = \hat{\bar{y}}_{reg}$
+\end{center}
+
+Thus, we can interpret the regression estimator as an approximation of the optimal difference estimator.
+
+\vspace{10}
+
+\subsection{Ratio estimator as difference estimator:}
+
+Since $\frac{\bar{y}}{\bar{x}} \approx B + \frac{\bar{y} - B\bar{x}}{\bar{x}_{U}}$,
+
+\begin{center}
+    $\hat{\bar{y}}_{r} = \frac{\bar{y}}{\bar{x}}\bar{x}_{U} \approx \bar{y} + B(\bar{x}_{U}-\bar{x})$
+\end{center}
+
+which is a difference estimator with $c = B = \frac{\bar{y}_{U}}{\bar{x}_{U}}$.
+
+\textbf{Note:}
+\begin{itemize}
+  \item $\hat{\bar{y}}_{r}$ and $\hat{\bar{y}}_{reg}$ are almost the same, only differing by $B$ and $B_{1}$
+  \item The approximate variance of $\hat{\bar{y}}_{r}$ is always larger than or equal to the approximate variance of $\hat{\bar{y}}_{reg}$
+  \item They are only equal when $B = \frac{\bar{y}_{U}}{\bar{x}_{U}} = c_{opt} = B_{1}$
+  \item This only happens if $(x,y) = (0,0)$ in the population least squares line.
+  \item \textbf{Population Least Squares Line:} $y = \bar{y}_{U} + B_{1}(x-\bar{x}_{U})$
+  \item In other words, the ratio estimator is as good as the regression estimator only when the population LS line passes through the origin
+\end{itemize}
+
+\section{\underline{3.4 2-phase sampling}}
+
+To compute the regression and ratio estimator, we need to know $\bar{x}_{U}$, the population mean of auxiliary variable $x$.
+
+\begin{itemize}
+  \item If $\bar{x}_{U}$ is unknown, a useful strategy is to carry out 2-phase sampling.
+  \item Phase 1: Measure the value of $x$ for every unit in a simple random sample \textbf{S} of size $n$.
+  \item Phase 2: Measure the values of both $x$ and $y$ for a simple random sample $\textbf{S}_{2}$ of size $n_{2}$ ($< n $) drawn from the phase 1 sample \textbf{S}.
+\end{itemize}
+
+In the estimators, replacing $\bar{y}$ by $\bar{y}_{2}$, $\bar{x}$ by $\bar{x}_{2}$, $\bar{x}_{U}$ by $\bar{x}$ we obtain:
+
+\vspace{10}
+
+\textbf{Regression estimator of $\bar{y}$ under 2-phase sampling}
+\begin{equation}
+  \begin{split}
+  \~{\bar{y}}_{reg} = \bar{y}_{2} + \~{B}_{1}(\bar{x}-\bar{x}_{2})
+\end{split}
+\end{equation}
+
+\textbf{Ratio estimator of $\bar{y}$ under 2-phase sampling}
+\begin{equation}
+  \begin{split}
+    \~{\bar{y}}_{r} = \frac{\bar{y}_{2}}{\bar{x}_{2}}\bar{x}
+  \end{split}
+\end{equation}
+
+where $\~{B}_{1} = \frac{\~{s}_{xy}}{\~{s}_{x}^{2}}$ is the estimate (based on $\textbf{S}_{2}$) of $B_{1} = \frac{S_{xy}}{S_{x}^{2}}$.
+
+\textbf{Note:}
+\begin{itemize}
+  \item In $\~{B}_{1}$, $\~{s}_{xy}$ is the sample covariance between $x$ and $y$, and $\~{s}_{x}^{2}$ the sample variance of $x$ computed from the phase 2 sample $\textbf{S}_{2}$
+  \item $B_{1}$ is the slope of the LS line fitted to the finite population, whereas $\~{B}_{1}$ is the slope of the LS line fitted to the phase 2 sample $\textbf{S}_{2}$
+  \item By treating \textbf{S} as the population that $\textbf{S}_{2}$ is drawn from, we can view $\~{\bar{y}}_{reg}$ and $\~{\bar{y}}_{r}$ as the regression and ratio estimators of $\bar{y}$, which in turn estimates $\bar{y}_{U}$
+\end{itemize}
+
+\vspace{10}
+
+\textbf{When to use 2-phase sampling:}
+
+When $x$ can be measured cheaply and quickly, whereas the measurement of $y$ is expensive and/or timeconsuming. Under this scenario, we can afford to measure $x$ for a large phase 1 sample, and measure $y$ in a smaller phase 2 sample only.
+
+\vspace{10}
+
+\subsection{3.4.1 Approximate variance of $\~{\bar{y}}_{reg}$:}
+
+\begin{equation}
+  \begin{split}
+    \~{\bar{y}}_{reg} &= \bar{y}_{2} + \~{B}_{1}(\bar{x}-\bar{x}_{2}) \\
+    &= \bar{y}_{2} + (B_{1} + \~{B}_{1} - B_{1})(\bar{x}-\bar{x}_{2}) \\
+    &= \bar{y}_{2} + B_{1}(\bar{x}-\bar{x}_{2}) + (\~{B}_{1} - B_{1})(\bar{x}-\bar{x}_{2}) \\
+    &\approx \bar{y}_{2} - B_{1}(\bar{x}_{2} - \bar{x})
+  \end{split}
+\end{equation}
+
+A SRS of a SRS is still SRS. Hence, $\textbf{S}_{2}$ is also an SRS from the original population. Therefore,
+\begin{center}
+$E(\bar{y}_{2}) = \bar{y}_{U}$
+
+$E(\bar{x}_{2}) = \bar{x}_{U} = E(\bar{x})$
+\end{center}
+
+Hence,
+
+\begin{equation}
+  \begin{split}
+    E(\~{\bar{y}}_{reg}) &\approx E\{\bar{y}_{2} - B_{1}(\bar{x}_{2} - \bar{x})\} \\
+    &= \bar{y}_{U} $\hspace{10} (approxmately unbiased)$
+  \end{split}
+\end{equation}
+
+and
+
+\begin{equation}
+  \begin{split}
+    var(\~{\bar{y}}_{reg}) &= var\{\bar{y}_{2} - B_{1}(\bar{x}_{2} - \bar{x})\} \\
+    &= var(\bar{y}_{2}) + B_{1}^{2}var(\bar{x}_{2} - \bar{x}) - 2B_{1}cov(\bar{y}_{2}, \bar{x}_{2} - \bar{x})
+  \end{split}
+\end{equation}
+
+Consider the above terms one by one:
+
+\vspace{5}
+
+Using basic variance formula,
+
+\begin{equation}
+  \begin{split}
+    var(\bar{y}_{2}) &= \left(\frac{1}{n_{2}} - \frac{1}{N}\right)S_{y}^{2} \\
+    &= \left(\frac{1}{n_{2}} - \frac{1}{n}\right)S_{y}^{2} + \left(\frac{1}{n} - \frac{1}{N}\right)S_{y}^{2}
+  \end{split}
+\end{equation}
+
+From Q4 of tutorial 4,
+\begin{equation}
+  var(\bar{x}_{2} - \bar{x}) = \left(\frac{1}{n_{2}} - \frac{1}{n}\right)S_{x}^{2}
+\end{equation}
+
+From Q5 of tutorial 4,
+\begin{equation}
+  \begin{split}
+    cov(\bar{y}_{2}, \bar{x}_{2} - \bar{x}) &= cov(\bar{y}_{2}, \bar{x}_{2}) - cov(\bar{y}_{2}, \bar{x}) \\
+    &= \left(1-\frac{n_{2}}{N}\right)\frac{S_{xy}}{n_{2}} - \left(1-\frac{n}{N}\right)\frac{S_{xy}}{n} $\hspace{2} (Q1 of tutorial 2)$ \\
+    &= \left(\frac{1}{n_{2}} - \frac{1}{n}\right)S_{xy}
+  \end{split}
+\end{equation}
+
+Substituting (14), (15) and (16) into (13):
+\begin{equation}
+  \begin{split}
+    var(\~{\bar{y}}_{reg}) &\approx \left(\frac{1}{n} - \frac{1}{N}\right)S_{y}^{2} + \left(\frac{1}{n_{2}} - \frac{1}{n}\right)(S_{x}^{2} - 2B_{1}S_{xy} + B_{1}^{2}S_{x}^{2}) \\
+    &= \left(\frac{1}{n} - \frac{1}{N}\right)S_{y}^{2} + \left(\frac{1}{n_{2}} - \frac{1}{n}\right)S_{y}^{2}(1-R^{2})
+  \end{split}
+\end{equation}
+
+Estimated variance of $\~{\bar{y}}_{reg}$:
+
+\begin{equation}
+    \begin{split}
+      \~{V}(\~{\bar{y}}_{reg}) = \left(\frac{1}{n} - \frac{1}{N}\right)\~{s}_{y}^{2} + \left(\frac{1}{n_{2}} - \frac{1}{n}\right)\~{s}_{y}^{2}(1-\~{r}^{2})
+    \end{split}
+\end{equation}
+
+where $\~{s}_{y}^{2}$ is the sample variance of $y$ and
+
+\begin{equation}
+  \~{r}^{2} = \frac{\~{s}_{xy}^{2}}{\~{s}_{x}^{2}\~{s}_{y}^{2}}
+\end{equation}
+
+is the square of the sample correlation between $x$ and $y$ computed from the phase 2 sample $\textbf{S}_{2}$
+
+\vspace{100}
+
+\textbf{Comparision of $\bar{y}$, $\~{\bar{y}}_{reg}$, $\bar{y}_{2}$:}
+\begin{itemize}
+  \item $\bar{y}$ contains $y$ information for $n$ units
+  \item $\~{\bar{y}}_{reg}$ contains $y$ information for $n_{2}$ units; $x$ information for $n$ units
+  \item$\bar{y}_{2}$ contains y information for $n_{2}$ units
+\end{itemize}
+
+Since $var(\bar{y}) = (\frac{1}{n}-\frac{1}{N})S_{y}^{2}$ and $var(\bar{y}_{2}) = (\frac{1}{n_{2}} - \frac{1}{N})S_{y}^{2}$,
+
+\begin{center}
+  $var(\bar{y}) \leq var(\~{\bar{y}}_{reg}) \leq var(\bar{y}_{2})$
+\end{center}
+
+We expect $\~{\bar{y}}_{reg}$ to be more efficient than $\bar{y}_{2}$, and less efficient than $\bar{y}$. However, it costs more to obtain $\bar{y}$ than $\~{\bar{y}}_{reg}$ since $\bar{y}$ measures $y$ values for all $n$ units.
+
+\begin{itemize}
+  \item If $R = 1$, $var(\~{\bar{y}}_{reg})$ becomes $var(\bar{y})$. If correlation is 1, we can predict $y_{i}$ perfectly from $x_{i}$. Since we measured all $x_{i}$, it is as good as knowing all $y_{i}$.
+  \item If $R = 0$, $var(\~{\bar{y}}_{reg})$ becomes $var(\bar{y}_{2})$. If correlation is 0, knowing $x_{i}$ does not help us to predict $y_{i}$. The auxiliary $x$ information cannot help us to get an estimator better than $var(\bar{y}_{2})$.
+\end{itemize}
+
+\subsection{3.4.2 Approximate variance of $\~{\bar{y}}_{r}$:}
+
+Let $f(u,v,w) = \frac{u}{v}w$. Hence $\frac{\delta f}{\delta u} = \frac{w}{v}$, $\frac{\delta f}{\delta v} = -\frac{uw}{v^{2}}$, $\frac{\delta f}{\delta w} = \frac{u}{v}$
+\begin{center}
+  $f(\bar{y}_{2}, \bar{x}_{2}, \bar{x}) = \~{\bar{y}}_{r} = \frac{\bar{y}_{2}}{\bar{x}_{2}}\bar{x}$
+\end{center}
+
+Using a first order Taylor series expansion of $f(\bar{y}_{2}, \bar{x}_{2}, \bar{x})$ around the point $(\bar{y}_{U}, \bar{x}_{U}, \bar{x}_{U})$,
+
+\begin{equation}
+  \begin{split}
+    \~{\bar{y}}_{r} &= f(\bar{y}_{2}, \bar{x}_{2}, \bar{x}) \\
+    &\approx f(\bar{y}_{U}, \bar{x}_{U}, \bar{x}_{U}) + \frac{\bar{x}_{U}}{\bar{x}_{U}}(\bar{y}_{2} - \bar{y}_{U}) - \frac{\bar{y}_{U}\bar{x}_{U}}{\bar{x}_{U}^{2}} - \frac{\bar{y}_{U}}{\bar{x}_{U}}(\bar{x}-\bar{x}_{U}) \\
+    &= \bar{y}_{2} - B(\bar{x}_{2} - \bar{x})
+  \end{split}
+\end{equation}
+
+Comparing (20) with (11), the approximate variance of $\~{\bar{y}}_{r}$ is of the same form as (17) but with $B$ instead of $B_{1}$.
+
+\begin{equation}
+  \begin{split}
+      var(\~{\bar{y}}_{r}) \approx (\frac{1}{n}-\frac{1}{N})S_{y}^{2} + (\frac{1}{n_{2}} - \frac{1}{n})(S_{y}^{2} - 2BS_{xy} + B^{2}S_{x}^{2})
+  \end{split}
+\end{equation}
+
+which can be estimated by
+
+\begin{equation}
+  \begin{split}
+      \~{V}(\~{\bar{y}}_{r}) \approx (\frac{1}{n}-\frac{1}{N})\~{s}_{y}^{2} + (\frac{1}{n_{2}} - \frac{1}{n})(\~{s}_{y}^{2} - 2\~{B}\~{s}_{xy} + \~{B}^{2}\~{s}_{x}^{2})
+  \end{split}
+\end{equation}
+
+where $\~{s}_{x}^{2}$, $\~{s}_{y}^{2}$, $\~{s}_{xy}$ are the sample variances and covariance computed from the phase 2 sample $\textbf{S}_{2}$ and $\~{B} = \frac{\bar{y}_{2}}{\bar{x}_{2}}$.
+
+\section{\underline{3.5 Estimators using known population}}
+
+\section{\underline{composition}}
+
+\subsection{3.5.1 Motivating example}
+
+Suppose a sample contains 80 men and 20 women. Sample mean of their weight is $\bar{y} = 134$.
+
+\begin{itemize}
+  \item $\bar{y} = 134$ is likely to be an overestimate of $\bar{y}_{U}$, the average population weight. This is because we are giving a higher weightage to men in the sample and men tend to be of higher weight.
+  \item To adjust the estimate in view of the above information, a better estimate would be to find the subsample means of the 80 men and 20 women. Then apply 0.5 weights to the subsample means. This is under the reasonable assumption that there are roughly 50:50 men and women in the population.
+\end{itemize}
+
+\subsection{3.5.2 General Case}
+
+\begin{itemize}
+  \item[$N$] population size
+  \item[\textbf{S}] a simple random sample drawn from the population
+  \item[n] sample size (fixed)
+\end{itemize}
+
+Subdivide the population into G parts/strata denoted by $U_{1}, ... , U_{G}$. For $g = 1,...,G$:
+
+\begin{itemize}
+  \item[$N_{g}$] size of stratum $g$
+  \item[$\bar{y}_{Ug}$] mean of variable $y$ in stratum $g$
+  \item[$t_{g}$] total of variable $y$ in stratum $g$
+  \item[$S^{2}_{g}$] variance of variable $y$ in stratum $g$
+  \item[$\textbf{S}_{g}$] subsample consisting of those elements in \textbf{S} that belong to stratum $g$
+  \item[$n_{g}$] size of $\textbf{S}_{g}$ (note that $n_{g}$ is not fixed)
+  \item[$\bar{y}_{g}$] subsample mean
+  \item[$s^{2}_{g}$] subsample variance
+\end{itemize}
+
+\textbf{Known population composition:}
+
+It is assumed that $W_{1} = \frac{N_{1}}{N}$, $W_{2} = \frac{N_{2}}{N}$, ..., $W_{G} = \frac{N_{G}}{N}$ are known.
+
+\subsection{3.5.3 The post-stratified mean}
+
+\textbf{Post-stratified mean:}
+
+\begin{equation}
+  \bar{y}_{post} = \sum_{g=1}^{G}W_{g}\bar{y}_{g}
+\end{equation}
+
+where $W_{g} = \frac{N_{g}}{N}$ is the stratum weight of (post-)stratum $g$.
+
+\textbf{Note:}
+\begin{itemize}
+  \item the subdivision of the sample into G subsamples was performed after the sample was selected, not before. Hence the name post-stratification
+  \item this is \underline{not} a sampling method
+\end{itemize}
+
+\vspace{5}
+
+\textbf{Conditional distribution of SRS:}
+
+Condition on the subsample sizes $n_{1}, ... , n_{G}$, the subsamples $\textbf{S}_{1}, ..., \textbf{S}_{G}$ can be treated as $G$ \underline{independent} simple random samples of size $n_{1}, ... , n_{G}$ drawn \underline{separately} from the G strata.
+
+\vspace{5}
+
+\textbf{Proof:}
+
+\begin{equation}
+  \begin{split}
+    P_{SRS \hspace{1} from \hspace{1} U}(\textbf{S}_{1}, \textbf{S}_{2} | n_{1}, n_{2}) &= \frac{P(\textbf{S} = \textbf{S}_{1} + \textbf{S}_{2})}{P(n_{1}, n_{2})} \\
+    &= \frac{1/_{N}C_{n}}{(_{N_{1}}C_{n_{1}}_{N_{2}}C_{n_{2}})/_{N}C_{n}} \\
+    &= \frac{1}{_{N_{1}}C_{n_{1}}} * \frac{1}{_{N_{2}}C_{n_{2}}} \\
+    &= P_{SRS \hspace{1} from \hspace{1} U_{1}}(\textbf{S}_{1})* \\
+    & \hspace{11} P_{SRS \hspace{1} from \hspace{1} U_{2}}(\textbf{S}_{2})
+  \end{split}
+\end{equation}
+
+\textbf{Conditional properties of $\bar{y}_{post}$:}
+
+Condition on the realized values of $n_{1},...,n_{G}$, we can treat the $G$ sub-samples as independent simple random samples of size $n_{1},...,n_{G}$ drawn separately from stratum 1 to $G$. Thus,
+
+\vspace{5}
+
+\underline{Conditional unbiasedness}
+\begin{equation}
+  \begin{split}
+    E(\bar{y}_{post} | n_{1},...,n_{G}) &= \sum_{g=1}^{G}W_{g}E(\bar{y}_{g} | $n_{1},...,n_{G}$) \\
+    &= \sum_{g=1}^{G}W_{g}E(\bar{y}_{U_{g}}) \\
+    &= \bar{y}_{U}
+  \end{split}
+\end{equation}
+
+\underline{Conditional variance of $\bar{y}_{post}$}
+\begin{equation}
+  \begin{split}
+    V(\bar{y}_{post} | n_{1},...,n_{G}) &= \sum_{g=1}^{G}W_{g}^{2}V(\bar{y}_{g} | $n_{1},...,n_{G}$) \\
+    &= \sum_{g=1}^{G}\left(\frac{N_{g}}{N}\right)^{2}\left(1-\frac{n_{g}}{N_{g}}\right)\frac{S_{g}^{2}}{n_{g}}
+  \end{split}
+\end{equation}
+
+Conditionally, you can treat $\bar{y}_{G}$ as a SRS and use basic variance formula.
+
+$\bar{y}_{U_{g}}$, $S_{g}^{2}$ are the mean, variance of variable $y$ in stratum $g$
+
+\textbf{Note:} the above formula is for sample mean, if we are interested in sample proportion, use variance formula for sample proportion instead.
+
+\vspace{5}
+
+\underline{Sample conditional variance of $\bar{y}_{post}$}
+\begin{equation}
+  \begin{split}
+    \hat{V}(\bar{y}_{post} | n_{1},...,n_{G}) &= \sum_{g=1}^{G}\left(\frac{N_{g}}{N}\right)^{2}\left(1-\frac{n_{g}}{N_{g}}\right)\frac{s_{g}^{2}}{n_{g}}
+  \end{split}
+\end{equation}
+and
+\begin{center}
+  $SE(\bar{y}_{post} | n_{1},...,n_{G}) = \sqrt{\hat{V}(\bar{y}_{post} | n_{1},...,n_{G})}$
+\end{center}
+
+\subsection{3.5.4 Comparison of condtional properties of post-stratified mean and sample mean}
+
+Both $\bar{y}_{post}$ and $\bar{y}$ can be written as weighted averages of the subsample means $\bar{y}_{1}, ..., \bar{y}_{G}$.
+\begin{center}
+  $\bar{y}_{post} =  \sum_{g=1}^{G}\frac{N_{g}}{N}\bar{y}_{g}$ and $\bar{y} = \sum_{g=1}^{G}\frac{n_{g}}{n}\bar{y}_{g}$
+\end{center}
+
+The stratum weights used in $\bar{y}_{post}$ and $\bar{y}_{U}$ are the same,
+
+\begin{center}
+  $\bar{y}_{post} = \sum_{g=1}^{G}W_{g}\bar{y}_{g}$ and $\bar{y}_{U} = \sum_{g=1}^{G}W_{g}\bar{y}_U{_{g}}$
+\end{center}
+
+which explains why $\bar{y}_{post}$ is conditionally unbiased for $\bar{y}_{U}$ given $n_{1},...,n_{G}$. Hence,
+\begin{equation}
+  \begin{split}
+    MSE(\bar{y}_{post} | n_{1},...,n_{G}) &= E\{(\bar{y}_{post} - \bar{y}_{U})^{2} | n_{1},...,n_{G}\} \\
+    &= V(\bar{y}_{post} | n_{1},...,n_{G})
+  \end{split}
+\end{equation}
+
+In contrast, $\bar{y}$ makes use of the empirical weights $\frac{n_{g}}{n}$. Hence,
+\begin{equation}
+  \begin{split}
+    E(\bar{y} | n_{1},...,n_{G}) &= \sum_{g=1}^{G}\frac{n_{g}}{n}E(\bar{y}_{g} | n_{1},...,n_{G}) \\
+    &= \sum_{g=1}^{G}\frac{n_{g}}{n}\bar{y}_{U_{g}} \neq \bar{y}_{U}
+  \end{split}
+\end{equation}
+
+\textbf{Conditional bias of $\bar{y}$:}
+\begin{equation}
+  \begin{split}
+    Bias(\bar{y} | n_{1},...,n_{G}) &= E(\bar{y} | n_{1},...,n_{G}) - \bar{y}_{U} \\
+    &= \sum_{g=1}^{G}(\frac{n_{g}}{n} - \frac{N_{g}}{N}) \bar{y}_{U_{g}}
+  \end{split}
+\end{equation}
+
+\textbf{Conditional variance of $\bar{y}$:}
+\begin{equation}
+  \begin{split}
+    V(\bar{y} | n_{1},...,n_{G}) = \sum_{g=1}^{G}(\frac{n_{g}}{n})^{2}(1 - \frac{n_{g}}{N_{g}}) \frac{S^{2}_{g}}{n_{g}}
+  \end{split}
+\end{equation}
+
+\textbf{Conditional MSE of $\bar{y}$:}
+\begin{equation}
+  \begin{split}
+    MSE(\bar{y} | n_{1},...,n_{G}) &= E\{(\bar{y} - \bar{y}_{U})^{2} | n_{1},...,n_{G}\} \\
+    &= [Bias(\bar{y} | n_{1},...,n_{G})]^{2} + V(\bar{y} | n_{1},...,n_{G})
+  \end{split}
+\end{equation}
+
+\textbf{Comment about bias:}
+
+From (30), if $n_{1},...,n_{G}$ are almost proportional to $N_{1},...,N_{G}$:
+\begin{center}
+  $\frac{n_{g}}{n} \approx \frac{N_{g}}{N}$
+\end{center}
+for all $g$, then $Bias(\bar{y} | n_{1},...,n_{G}) \approx 0$. However, if sample composition does not coincide with population composition, then it means certain strata are severly over-represented while other strata are under-represented. In such case, the conditional bias of $\bar{y}$ given $n_{1},...,n_{G}$ can be substantial.
+
+\vspace{5}
+
+In contrast, $\bar{y}_{post}$ remains conditonially unbiased for $\bar{y}_{U}$. Thus, post stratification offers protection against non-representative samples.
+
+\vspace{5}
+
+\textbf{Relative efficiency:}
+\begin{equation}
+  \frac{MSE(\bar{y}|n_{1}, n_{2})}{MSE(\bar{y}_{post}|n_{1}, n_{2})}
+\end{equation}
+
+\subsection{3.5.5 Summary}
+
+\textbf{Why post-stratify? Why can't we use stratified sampling to begin with?}
+\begin{enumerate}
+  \item Unavailability of a suitable sampling frame for each stratum, even though the stratum sizes $N_{1},...,N_{G}$ are often obtainable from official statistics
+  \item Inability to classify sampling units into the appropriate stratum without actual contact. Eg. Personal characteristics (age, sex, education) or household characteristics (household size, employment status)
+  \item Multivariate and multi-purpose nature of most surveys
+\end{enumerate}
+
+\textbf{Advantages of post-stratification}
+\begin{enumerate}
+  \item By comparing sample composition with population composition, we can see how representative the sample is
+  \item Provides a way of revising the sample estimate to accounty for over or under representation of certain portions of the population in the sample
+  \item It is more relevent to assess the precision of an estimate conditionally given the realized $n_{1},...,n_{G}$ than unconditionally
+\end{enumerate}
+
+\rule{1\linewidth}{0.25pt}
+\end{document}
