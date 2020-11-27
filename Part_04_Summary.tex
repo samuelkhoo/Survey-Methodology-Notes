@@ -1,0 +1,240 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+\pdfinfo{
+  /Title (example.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Khoo Wu Zhe Samuel)
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Part 4 - Domain Estimation}} \\
+\end{center}
+
+Sometimes we want to obtain separate estimates for certain subpopulations on the basis of a sample drawn from the whole population. Such sub-populations are called domains of interest.
+
+\vspace{5}
+
+Reasons for not sampling directly from the subpopulations:
+\begin{itemize}
+  \item unavailability of a suitable sampling frame; unable to identify and locate members of the subpopulation
+  \item multi-variate and multi-purpose nature of most surveys
+\end{itemize}
+
+\textbf{Notation:}
+\begin{itemize}
+  \item[$N$] population size
+  \item[\textbf{S}] a simple random sample drawn from the population
+  \item[n] sample size (fixed)
+\end{itemize}
+
+Subdivide the population into D domains denoted by $U_{1}, ... , U_{G}$. For $d = 1,...,D$:
+
+\begin{itemize}
+  \item[$N_{d}$] size of domain $d$
+  \item[$\bar{y}_{Ud}$] mean of variable $y$ in domain $d$
+  \item[$t_{yd}$] total of variable $y$ in domain $d$
+  \item[$S^{2}_{yd}$] variance of variable $y$ in domain $d$
+  \item[$\textbf{S}_{d}$] subsample consisting of those elements in \textbf{S} that belong to domain $d$
+  \item[$n_{d}$] size of $\textbf{S}_{d}$ (note that $n_{d}$ is not fixed)
+  \item[$\bar{y}_{d}$] subsample mean
+  \item[$s^{2}_{yd}$] subsample variance
+\end{itemize}
+
+\section{\underline{4.1 Estimation of a domain mean}}
+
+without loss of generality, we may assume that $\bar{y}_{U_{1}}$ (mean of the first domain) is what we want to estimate. A natural estimator is the subsample mean
+
+\begin{center}
+  $\bar{y}_{1}= \frac{1}{n_{1}}\sum_{i \in \textbf{S}}y_{i}$
+\end{center}
+
+\subsection{Choice 1: Conditional inference}
+
+Condition on $n_{1}$, $\textbf{S}_{1}$ is a SRS of size $n_{1}$ drawn from domain $U_{1}$. Hence, similar to section 2.3,
+
+\begin{itemize}
+  \item $E(\bar{y}_{1} | n_{1}) = \bar{y}_{U_{1}}$
+  \item $V(\bar{y}_{1} | n_{1}) = (1-\frac{n_{1}}{N_{1}})\frac{1}{n_{1}}S_{y1}^{2}$
+  \item $\hat{V}(\bar{y}_{1} | n_{1}) = (1-\frac{n_{1}}{N_{1}})\frac{1}{n_{1}}s_{y1}^{2}$
+\end{itemize}
+
+We can also make use of the conditional independence of $\textbf{S}_{1}$ and $\textbf{S}_{2}$ from section 3.5.3 to obtain
+
+\begin{center}
+  $\hat{V}(\bar{y}_{1} - \bar{y}_{2} | n_{1}, n_{2}) = (1-\frac{n_{1}}{N_{1}})\frac{1}{n_{1}}s_{y1}^{2} + (1-\frac{n_{2}}{N_{2}})\frac{1}{n_{2}}s_{y2}^{2}$
+\end{center}
+
+An approximate 95\% confidence interval for $\bar{y}_{U_{1}} - \bar{y}_{U_{2}}$:
+
+\begin{center}
+  $\bar{y}_{1} - \bar{y}_{2} \pm 1.96 \sqrt{\hat{V}(\bar{y}_{1} - \bar{y}_{2} | n_{1}, n_{2})}$
+\end{center}
+
+\subsection{Choice 2: Unconditional inference}
+
+Do not condition on $n_{d}$ and treat it as random. Hence, the usual variance formula for a sample mean does not apply. Instead, treat
+
+\begin{equation}
+    \bar{y}_{d} = \frac{\sum _{i \in \textbf{S}_{d}}y_{i}}{n_{d}}
+    = \frac{\sum _{i \in \textbf{S}} u_{i}}{\sum _{i \in \textbf{S}} x_{i}}
+    = \hat{B}
+\end{equation}
+
+as a ratio estimator by defining
+
+$x_{i}=$
+\begin{cases}
+      1 $ if $i \in U_{d}$\\
+      0 $ if $i \not\in U_{d}$
+\end{cases}
+$u_{i}=$
+\begin{cases}
+      y_{i} $ if $i \in U_{d}$\\
+      0 $ if $i \not\in U_{d}$
+\end{cases}
+
+The usual formula for estimated variance of the ratio estimator in section 2.8 can then be used.
+
+\vspace{5}
+
+\textbf{Note:}
+\begin{itemize}
+  \item Summing $u_{i}$ over the whole sample is the same as summing $y_{i}$ over subsample
+  \item Subsample size is the same as summing the domain membership indicator
+\end{itemize}
+
+\section{\underline{4.2 Estimation of a domain total}}
+
+\subsection{Case 1: $N_{d}$ is known}
+\begin{itemize}
+  \item $t_{yd} = N_{d}\bar{y}_{U_{d}}$
+  \item $\hat{t}_{yd} = N_{d}\bar{y}_{d}$
+  \item $\hat{V}(\hat{t}_{yd} | n_{d}) = N_{d}^{2}\hat{V}(\bar{y}_{d} | n_{d})$
+\end{itemize}
+
+\subsection{Case 2: $N_{d}$ is unknown}
+By defining $u_{i}=$
+\begin{cases}
+      y_{i} $ if $i \in U_{d}$\\
+      0 $ if $i \not\in U_{d}$
+\end{cases}
+the population total of the new variable $u$ is the domain total of the old variable $y$. Thus, the problem is reduced to that of estimating the population total of $u$.
+
+\begin{itemize}
+  \item $\hat{t}_{u} = N\bar{u} = N\frac{\sum_{i \in \textbf{S}} u_{i}}{n} = N\frac{\sum_{i \in \textbf{S}_{d}} y_{i}}{n}$
+  \item $V(\hat{t}_{u}) = N^{2}V(\bar{u}) = N^{2}(1-\frac{n}{N})\frac{1}{n}S^{2}_{u}$
+  \item $\hat{V}(\hat{t}_{u}) = N^{2}\hat{V}(\bar{u}) = N^{2}(1-\frac{n}{N})\frac{1}{n}s^{2}_{u}$
+\end{itemize}
+
+\subsection{Difference between $\hat{t}_{u}$ and $\hat{t}_{yd}$}
+
+\begin{equation}
+  \begin{split}
+    \hat{t}_{u} &= N\frac{\sum_{i \in \textbf{S}_{d}} y_{i}}{n} \\
+    &= \left(N\frac{n_{d}}{n}\right)\frac{\sum_{i \in \textbf{S}_{d}} y_{i}}{n_{d}} \\
+    &= \hat{N}_{d}\bar{y}_{d}
+  \end{split}
+\end{equation}
+
+\begin{itemize}
+  \item $\hat{t}_{u}$ and $\hat{t}_{yd}$ differ in the replacement of the unknow N by an estimate $\hat{N}_{d} = N\frac{n_{d}}{n}$
+  \item inference based on $\hat{t}_{yd}$ is conditional on $n_{d}$ in the case of known $N_{d}$
+  \item inference based on $\hat{t}_{u}$ is unconditional in the case of unknown $N_{d}$
+\end{itemize}
+
+\section{\underline{4.3 Application to dual frame surveys}}
+
+Sometimes our sampling frame does not cover 100\% of the target population but we can find a supplementary frame so that the 2 frames together exhaust the whole population.
+
+\vspace{5}
+
+Denote the 2 frames by A & B. We select a simple random sample from each frame.
+
+\vspace{5}
+
+In most applications, $N_{A}$ and $N_{B}$ are known but the amount of overlap $N_{AB}$ is unknown.
+
+\vspace{5}
+
+Since the population is the disjoint union of A-B, AB and B-A, the poopulation total is the sum of the 3 subpopulation totals. Thus,
+
+\begin{center}
+  $t = t_{A-B} + t_{AB} + t_{B-A}$
+\end{center}
+
+where a weighted estimate of $t_{AB} = t_{BA}$ is
+\begin{center}
+$w\hat{t}_{AB} + (1-w)w\hat{t}_{BA}$
+\end{center}
+
+We can estimate $t_{A-B}$ and $t_{AB}$ from the sample drawn from A, and $t_{B-A}$ and $t_{BA}$ from the sample drawn from B using the method of case 2 of section 4.2.
+\rule{1\linewidth}{0.25pt}
+\end{document}
