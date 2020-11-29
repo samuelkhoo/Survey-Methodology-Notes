@@ -1,0 +1,545 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+\pdfinfo{
+  /Title (Part_05_Summary.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Khoo Wu Zhe Samuel)
+  /Subject (Survey Methodology)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Part 5 - Stratified Simple Random}} \\
+     \Large{\underline{Sampling}}
+\end{center}
+
+\section{\underline{5.1 Description}}
+
+\textbf{Stratified sampling:}
+
+Sampling independently from each stratum where the population is partitioned into $H$ subpopulations (strata), assuming that it is possible to sample directly from each stratum.
+
+\textbf{Stratified SRS:}
+
+A special case of stratified sampling that uses simple random sampling for selecting units from each stratum.
+
+\textbf{Reasons for using stratified sampling:}
+\begin{enumerate}
+  \item We are interested in certain subpopulations of the whole population
+  \item Administrative convenience
+  \item Different approaches to sampling may be required for different parts of the population which should be treated as different strata
+  \item Ensure that every subpopulation is represented in the final sample
+  \item Stratification may produce more efficient estimates of the characteristics of the whole population. This happens when a heterogeneous population is divided into strata that are internally homogeneous.
+\end{enumerate}
+
+\section{\underline{5.2 Notation}}
+For $h = 1,...,H$, where $H$ is the number of strata:
+\begin{itemize}
+  \item[$N_{h}$] size of stratum $h$
+  \item[$t_{h}$] = $\sum_{j=1}^{N_{h}}y_{hj}$
+  \item the total of variable $y$ in stratum $h$, where $y_{hj}$ is the y-value of unit $j$ in stratum $h$
+  \item[$\bar{y}_{U_{h}}$] = $\frac{t_{h}}{N_{h}}$
+  \item the mean of variable $y$ in stratum $h$
+  \item[$S^{2}_{h}$] = $\frac{1}{N_{h} - 1}\sum_{j=1}^{N_{h}}(y_{hj} - \bar{y}_{U_{h}})^{2}$
+  \item the variance of variable $y$ in stratum $h$
+\end{itemize}
+
+Sample analogues:
+\begin{itemize}
+  \item[$\textbf{S}_{h}$] sample drawn from stratum $h$
+  \item[$n_{h}$] size of $\textbf{S}_{h}$ (unlike post-stratification, $n_{h}$ is fixed)
+  \item[$\bar{y}_{h}$] = $\frac{1}{n_{h}}\sum_{j \in \textbf{S}_{h}}y_{hj}$
+  \item[$s_{h}^{2}$] = $\frac{1}{n_{h} - 1}\sum_{j \in \textbf{S}_{h}}(y_{hj} - \bar{y}_{h})^{2}$
+\end{itemize}
+
+Relating overall population quantities to stratum quantities:
+
+\begin{itemize}
+  \item Overall population size: $N=N_{1}+...+N_{H}$
+  \item Total sample size: $n=n_{1}+...+n_{H}$
+  \item Overall population total: $t=t_{1}+...+t_{H}$
+  \item Overall population mean: $\bar{y}_{U} = \sum_{h=1}^{H}W_{h}\bar{y}_{U_{h}}$
+\end{itemize}
+
+where $W_{h} = \frac{N_{h}}{N}$ is the stratum weight
+
+\section{\underline{5.3 Estimation of population mean,}}
+\section{\underline{total and proportion}}
+
+\textbf{Stratified mean:}
+
+\begin{center}
+  $\bar{y}_{str} = \sum_{h=1}^{H}W_{h}\bar{y}_{h}$
+\end{center}
+
+\begin{itemize}
+  \item An unbiased estimator of $\bar{y}_{U}$
+\end{itemize}
+
+\textbf{Variance of $\bar{y}_{str}$:}
+
+\begin{equation}
+  \begin{split}
+    V(\bar{y}_{str}) &= \sum_{h=1}^{H}W_{h}^{2}V(\bar{y}_{h}) $\hspace{5} by independence$\\
+    &= \sum_{h=1}^{H}W_{h}^{2}(1-\frac{n_{h}}{N_{h}})\frac{1}{n_{h}}S_{h}^{2} \\
+    &= \sum_{h=1}^{H}W_{h}^{2}(\frac{1}{n_{h}} - \frac{1}{N_{h}})S_{h}^{2}
+  \end{split}
+\end{equation}
+
+\textbf{Estimated variance of $\bar{y}_{str}$:}
+
+\begin{equation}
+  \hat{V}(\bar{y}_{str}) = \sum_{h=1}^{H}W_{h}^{2}(1-\frac{n_{h}}{N_{h}})\frac{1}{n_{h}}s_{h}^{2}
+\end{equation}
+
+\begin{itemize}
+  \item $SE(\bar{y}_{str}) = \sqrt{\hat{V}(\bar{y}_{str})}$
+\end{itemize}
+
+\textbf{Estimation of proportion:} a special case of estimating the means when $y$ is 0-1.
+
+\vspace{5}
+
+\textbf{Estimation of population total:}
+
+Two methods to obtain the same estimator.
+
+\vspace{5}
+
+Number-raised stratified mean:
+\begin{center}
+$\hat{t}_{str} = N\bar{y}_{str}$
+\end{center}
+
+Number-raised within stratum:
+\begin{center}
+$\hat{t}_{str} = N_{1}\bar{y}_{1} + ... + N_{H}\bar{y}_{H}$
+\end{center}
+
+\begin{itemize}
+  \item $SE(\hat{t}_{str}) = N\{SE(\bar{y}_{str})\}$
+\end{itemize}
+
+\section{\underline{5.4 Design problems}}
+
+\subsection{5.4.1 Sample allocation}
+
+For a given total sample size $n$, how should we choose $n_{1},...,n_{H}$?
+
+\vspace{5}
+
+\textbf{1. Proportional allocation:}
+
+\begin{center}
+$n_{h} = \frac{n}{N}N_{h}$
+\end{center}
+
+\textbf{Variance of $\bar{y}_{str}$ (proportional):}
+\begin{equation}
+  \begin{split}
+    V_{prop}(\bar{y}_{str}) &= \sum_{h=1}^{H}W_{h}^{2}(1-\frac{n}{N})\frac{1}{nW_{h}}S_{h}^{2} \\
+    &= (1-\frac{n}{N})\frac{1}{n}\sum_{h=1}^{H}W_{h}S_{h}^{2}
+  \end{split}
+\end{equation}
+
+(3) may not be exact as it assumes $n_{h}$ is an integer. This may not be the case in practice. However, it is still useful for interpretation and in theoretical comparison.
+
+\vspace{5}
+
+\textbf{Proportional stratified SRS vs SRS:}
+
+\vspace{5}
+
+Ignoring term of order $\frac{1}{N_{h}-1}$ and $\frac{1}{N-1}$,
+\begin{center}
+$V_{prop}(\bar{y}_{str}) \leq V_{SRS}(\bar{y})$
+\end{center}
+
+* strictly less than unless all the stratum means are equal.
+
+\vspace{5}
+
+Proof:
+
+\vspace{5}
+
+Required to show that $S^{2} \geq \sum_{h=1}^{H}W_{h}S_{h}^{2}$.
+
+\begin{equation}
+  \begin{split}
+    LHS &= S^{2} \\
+    &= \frac{N}{N-1}\frac{1}{N}\sum_{h=1}^{H}\sum_{j=1}^{N_{h}}(y_{hj - \bar{y}_{U}})^{2} \\
+    &= (1+\frac{1}{N-1})\frac{1}{N}\sum_{h=1}^{H}\sum_{j=1}^{N_{h}}(y_{hj - \bar{y}_{U}})^{2} \\
+    &\approx \frac{1}{N}\sum_{h=1}^{H}\sum_{j=1}^{N_{h}}(y_{hj - \bar{y}_{U}})^{2} $\hspace{5} ignoring term of order$
+  \end{split}
+\end{equation}
+
+Since
+\begin{center}
+    $S_{h}^{2} &\approx \frac{1}{N_{h}}\sum_{j=1}^{N_{h}}(y_{U_{h}})^{2}$\hspace{5} ignoring term of order
+\end{center}
+
+Hence,
+\begin{center}
+  $RHS \approx \frac{1}{N}\sum_{h=1}^{H}\sum_{j=1}^{N_{h}}(y_{hj} - \bar{y}_{U_{h}})^{2}$
+\end{center}
+
+\begin{itemize}
+  \item LHS = Total sum of squares
+  \item RHS = Residual sum of squares
+\end{itemize}
+
+Since Total SS = Between group SS + Residual SS,
+\begin{center}
+    LHS $\geq$ RHS
+\end{center}
+
+\textbf{2. Neyman allocation:}
+
+Optimal among all allocations with the same total sample size. Choose $n_{h}$ to minimise $V(\bar{y}_{str})$ given by (1) subject to the constraint $n_{1} + ... + n_{H} = n$
+
+Using method of Lagrange Multiplier,
+
+\begin{equation}
+  \begin{split}
+    L &= \sum_{h=1}^{H}W_{h}^{2}(1-\frac{n_{h}}{N_{h}})\frac{1}{n_{h}}S_{h}^{2} + \lamda(n_{1} + ... + n_{H} - n) \\
+    &= \sum_{h=1}^{H}W_{h}^{2}(\frac{1}{n_{h}}-\frac{1}{N_{h}})\frac{1}{n_{h}}S_{h}^{2} + \lambda(n_{1} + ... + n_{H} - n)
+  \end{split}
+\end{equation}
+
+Setting $\frac{\delta L}{\delta n_{h}} &= -\frac{1}{n_{h}^{2}}W_{h}^{2}S_{h}^{2} + \lambda = 0$,
+
+\begin{center}
+  $n_{h} = cN_{h}S_{h}$
+\end{center}
+
+We should take a large sample from stratum $h$ if the stratum size $N_{h}$ and/or the stratum deviation $S_{h}$ is large.
+
+\vspace{5}
+
+Since
+\begin{center}
+  $c = \frac{n}{N_{1}S_{1} + ... + N_{H}S_{H}}$
+\end{center}
+Hence,
+\begin{equation}
+  \begin{split}
+    n_{h} &= cN_{h}S_{h} \\
+    &= \frac{nN_{h}S_{h}}{N_{1}S_{1} + ... + N_{H}S_{H}} \\
+    &= \frac{nW_{h}S_{h}}{W_{1}S_{1} + ... + W_{H}S_{H}} \\
+    &= \frac{nW_{h}S_{h}}{S_{WS}}
+  \end{split}
+\end{equation}
+
+Where $S_{WS} = \sum_{h=1}^{H}W_{h}S_{h}$, the weighted sum of stratum standard deviation.
+
+\vspace{5}
+
+\textbf{Variance of $\bar{y}_{str}$ (optimal):}
+\begin{equation}
+  \begin{split}
+    V_{opt}(\bar{y}_{str}) &= \sum_{h=1}^{H}W_{h}^2(\frac{1}{n_{h}} - \frac{1}{N_{h}})S_{h}^{2} \\
+    &= \sum_{h=1}^{H}W_{h}^{2}S_{h}^{2}\frac{S_{WS}}{nW_{h}S_{h}} - \sum_{h=1}^{H}\frac{1}{N}W_{h}S_{h}^{2} \\
+    &= \frac{(\sum W_{h}S_{h})^{2}}{n} - \frac{\sum W_{h}S_{h}^{2}}{N}
+  \end{split}
+\end{equation}
+
+\textbf{Neyman allocation vs proportional allocation:}
+
+\begin{equation}
+  \begin{split}
+    V_{prop}(\bar{y}_{str}) - V_{opt}(\bar{y}_{str}) &= \frac{1}{n}\left\{\sum_{h=1}^{H}W_{h}S_{h}^{2}-\left(\sum_{h=1}^{H}W_{h}S_{h}\right)^{2}\right\} \\
+    &= \frac{1}{n}Var(X)
+  \end{split}
+\end{equation}
+
+of a discrete random variable X that takes on the value $S_{h}$ with probability $W_{h}$. Hence,
+
+\begin{center}
+  $V_{opt}(\bar{y}_{str}) \leq V_{prop}(\bar{y}_{str})$
+\end{center}
+
+\textbf{Note:} The word "optimal" is deceptive because the optimal allocation for estimating the population mean $\bar{y}_{U}$ of variable $y$ may not be optimal for estimating the mean $\bar{z}_{U}$ of another vriable $z$.
+
+\subsection{5.4.2 Setting stratum boundaries}
+
+When stratifying according to an auxiliary variable, we have to set stratum boundaries. We use the \textbf{square root frequency} method.
+
+\vspace{5}
+
+Let $x$ be an auxiliary variable where the value of $x$ is known for each unit in the population and $x$ is highly correlated with $y$.
+
+\begin{enumerate}
+  \item Partition the range of $x$ into a large number of narrow equal-width intervals.
+  \item Calculate the population frequency $f$ within each interval.
+  \item set stratum boundaries in such a way that the sums of $\sqrt{f}$ within the stratum are roughly equal.
+\end{enumerate}
+
+The boundaries obtained using the $\sqrt{f}$ method are optimal for the estimation of $\bar{x}_{U}$.
+
+\vspace{5}
+
+They should also do well for estimating $\bar{y}_{U}$ if variable $x$ is well correlated with $y$.
+
+\subsection{5.4.3 Number of stratas}
+
+It appears at first sight that increasing the number of stratas is a good idea as this is likely to lead to stratas that are internally homogeneous.
+
+\vspace{5}
+
+However, we cannot keep on increasing the number of strats indefinitely as this will increase administrative costs and lead to small sample size (and large variance) within the stratum.
+
+\vspace{5}
+
+Assuming that the relationship between $x$ and $y$ follows a simple linear regression model, if we stratify according to $x$ using the $\sqrt{f}$ method and allocate the sample using optimum allocation, then it can be proven that $V(\bar{y}_{str})$ is approxmately proportional to
+\begin{center}
+  $V(H) = \frac{\rho^{2}}{H^{2}} + (1-\rho^{2})$
+\end{center}
+
+where $H$ is the number of strata and $\rho$ is the correlation between $x$ and $y$.
+
+\vspace{5}
+
+Then choose the number of strata according to the reduction in variance when adding an additional strata.
+
+\section{\underline{5.5 Post-stratifying stratified SRS}}
+
+Refer to Q5 of Tutorial 7.
+
+\section{\underline{5.6 Ratio estimation under stratified}}
+\section{\underline{sampling}}
+
+In section 3.1, we consider the use of auxiliary information in estimation and defined the ratio estimator. With stratification, there are 2 ways to construct the ratio estimates: combined or separate.
+
+\subsection{5.6.1 Combined Ratio estimator}
+
+Since
+\begin{itemize}
+  \item[$\hat{t}_{y, str}$] = $\sum_{j=1}^{N_{h}}\bar{y}_{hj}$ estimates $t_{y}$
+  \item[$\hat{t}_{x, str}$] = $\sum_{j=1}^{N_{h}}\bar{x}_{hj}$ estimates $t_{x}$
+\end{itemize}
+
+Hence,
+\begin{center}
+  $\hat{B}_{str} = \frac{\hat{t}_{y, str}}{\hat{t}_{x, str}} = \frac{\bar{y}_{str}}{\bar{x}_{str}}$ estimates B
+\end{center}
+
+Since $t_{x}$ is known, we can estimate $t_{y} = Bt_{x}$ by
+\begin{center}
+  $\hat{t}_{yrc} = \hat{B}_{str}t_{x}$
+\end{center}
+the combined ratio estimator of the total $t_{y}$.
+
+\vspace{5}
+
+\textbf{Approximate mean and variance:}
+\begin{equation}
+  \begin{split}
+    \hat{B}_{str} - B &= \frac{\bar{y}_{str} - B\bar{x}_{str}}{\bar{x}_{str}} \\
+    &= \frac{\bar{y}_{str} - B\bar{x}_{str}}{\bar{x}_{U}}\left(\frac{\bar{x}_{U}}{\bar{x}_{str}} -1 +1 \right) \\
+    &= \frac{\bar{y}_{str} - B\bar{x}_{str}}{\bar{x}_{U}} + \frac{\bar{y}_{str} - B\bar{x}_{str}}{\bar{x}_{U}}\left(\frac{\bar{x}_{U}}{\bar{x}_{str}} -1 \right) \\
+    &\approx \frac{\bar{y}_{str} - B\bar{x}_{str}}{\bar{x}_{U}} $\hspace{5} since $\frac{\bar{x}_{U}}{\bar{x}_{str}}$ goes to 1$ \\
+    &= \frac{\bar{z}_{str}}{\bar{x}_{U}}
+  \end{split}
+\end{equation}
+
+where $z$ is a new variable,
+\begin{center}
+  $z_{hi} = y_{hi} - Bx_{hi}$
+\end{center}
+for unit $i$ $(i=1,...,N_{h})$ in stratum $h$ $(h=1,...,H)$
+
+\vspace{5}
+
+Multiplying $t_{x}$ to (9),
+\begin{center}
+  $\hat{t}_{yrc} - t_{y} \approx N\bar{z}_{str} = \hat{t}_{z,str}$
+\end{center}
+
+If the samples sizes $n_{1}, ... , n_{H}$ are large. Hence,
+\begin{center}
+  $\hat{t}_{yrc} \approx t_{y} + \hat{t}_{z,str}$
+\end{center}
+
+It follows that
+
+\begin{equation}
+  \begin{split}
+    E(\hat{t}_{yrc}) &\approx t_{y} + E(\hat{t}_{z,str}) \\
+    &= t_{y} + t_{z} \\
+    &= t_{y} $\hspace{5} since $t_{z} = t_{y} - Bt_{x} = 0$ $
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \begin{split}
+    V(\hat{t}_{yrc}) &\approx V(\hat{t}_{z,str}) \\
+    &= \sum_{h=1}^{H}N_{h}^{2}(1-\frac{n_{h}}{N_{h}})\frac{1}{n_{h}}S_{zh}^{2}
+  \end{split}
+\end{equation}
+
+where,
+\begin{center}
+  $S_{zh}^{2} = S_{yh}^{2} - 2BS_{xyh} + B^{2}S_{xh}^{2}$
+\end{center}
+is the stratum variance of the variable $z$ in stratum $h$. Derivation is similar to equation (5) in Part 3.
+\vspace{5}
+
+\textbf{Note:} even though $\bar{z}_{U} = \bar{y}_{U} - B\bar{x}_{U} = 0$, $\bar{z}_{U_{h}} = \bar{y}_{U_{h}} - B\bar{x}_{U_{h}} \neq 0$ in general
+
+\vspace{5}
+For sample data,
+\begin{center}
+  $s_{zh}^{2} = s_{yh}^{2} - 2\hat{B}_{str}s_{xyh} + \hat{B}^{2}_{str}s_{xh}^{2}$
+\end{center}
+Similar to section 3.1,
+\begin{equation}
+  \hat{V}(\hat{t}_{yrc}) &= \left(\frac{\bar{x}_{U}}{\bar{x}_{str}}\right)^{2}\sum_{h=1}^{H}N_{h}^{2}(1-\frac{n_{h}}{N_{h}})\frac{1}{n_{h}}s_{zh}^{2}
+\end{equation}
+
+\subsection{5.6.2 Separate Ratio estimator}
+
+If stratum totals $t_{x1}, ... , t_{xH}$ of the auxiliary variable are known, we are in a position to apply the ratio method separately within each stratum.
+
+\begin{center}
+  $\hat{t}_{yhr} = \frac{\bar{y}_{h}}{\bar{x}_{h}} = \hat{B}_{h}t_{xh}$ is an estimate of $t_{yh}$
+\end{center}
+
+Hence, the separate ratio estimator of $t_{y}$ is:
+
+\begin{center}
+  $\hat{t}_{yrs} = \sum_{h=1}^{H}\hat{t}_{yhr} = \sum_{h=1}^{H}\hat{B}_{h}N_{h}\bar{x}_{U_{h}}$
+\end{center}
+
+\textbf{Approximate mean and variance:}
+
+\vspace{5}
+
+Let $\hat{B}_{h} = \frac{\bar{y}_{h}}{\bar{x}_{h}}$, $B_{h} = \frac{\bar{y}_{U_{h}}}{\bar{x}_{U_{h}}}$.
+
+\begin{center}
+  $t_{y} = \sum_{h=1}^{H}t_{yh} = \sum_{h=1}^{H}B_{h}N_{h}\bar{x}_{U_{h}}$
+\end{center}
+
+Hence,
+
+\begin{equation}
+  \begin{split}
+  \hat{t}_{yrs}-t_{y} &= \sum_{h=1}^{H}N_{h}\bar{x}_{U_{h}}(\hat{B}_{h} - B_{h}) \\
+  &\approx \sum_{h=1}^{H}N_{h}\bar{u}_{h}
+\end{split}
+\end{equation}
+
+Using the approximation:
+\begin{center}
+  $\hat{B}_{h} - B_{h} \approx \frac{\bar{y}_{h} - B_{h}\bar{x}_{h}}{\bar{x}_{U_{h}}} = \frac{\bar{u}_{h}}{\bar{x}_{U_{h}}}$
+\end{center}
+
+\begin{itemize}
+  \item See equation (22) of Part 2 for details.
+  \item $\bar{u}_{h}$ is the stratum sample mean of the variable $u$ defined by $u_{hi} = y_{hi} - B_{h}x_{hi}$
+\end{itemize}
+
+Hence $E(\hat{t}_{yrs}) \approx t_{y}$ and
+\begin{center}
+  $V(\hat{t}_{yrs}) \approx \sum_{h=1}^{H}N_{h}^{2}(1-\frac{n_{h}}{N_{h}})\frac{1}{n_{h}}S_{uh}^{2}$
+\end{center}
+
+where
+\begin{center}
+  $S_{uh}^{2} = S_{yh}^{2} - 2B_{h}S_{xyh} + B_{h}^{2}S_{xh}^{2}$
+\end{center}
+is the stratum variance of the variable $u$.
+
+\begin{equation}
+  \begin{split}
+    s_{uh}^{2} &= s_{yh}^{2} - 2B_{h}s_{xyh} + B_{h}^{2}s_{xh}^{2} \\
+    &= \frac{\sum_{i \in \textbf{S}_{h}}(y_{hi}-\hat{B}_{h}x_{hi})^{2}}{n_{h} - 1}
+  \end{split}
+\end{equation}
+
+Hence,
+\begin{equation}
+    \hat{V}(\hat{t}_{yrs}) = \sum_{h=1}^{H}\left(\frac{\bar{x}_{U_{h}}}{\bar{x}_{h}}\right)^{2}N_{h}^{2}(1-\frac{n_{h}}{N_{h}})\frac{1}{n_{h}}s_{uh}^{2}
+\end{equation}
+
+This is similar to a sum of $\hat{V}(\hat{t}_{yr})$ in section 3.1
+
+\vspace{5}
+
+\subsection{5.6.3 Discussion}
+\begin{itemize}
+  \item Unless the ratio $B_{h} = \frac{t_{yh}}{t_{xh}}$ is constant across stratums, the separate ratio estimator is preferred. This is provided that the sample sizes $n_{1}, ... , n_{H}$ are all reasonably large to ensure that $\hat{t}_{yrs}$ does not suffer from a large cumulative bias.
+  \item The computation of $\hat{t}_{yrc}$ requires only the knowledge of the population total $t_{x}$ whereas the computation of $\hat{t}_{yrs}$ requires the stratum totals
+  \item To estimate the population mean, we simply divide $\hat{t}_{yrc}$ and $\hat{t}_{yrs}$ by population size and modify variance formulae accordingly
+  \item Separate regression estimates can be constructed similarly. Combined regression estimate not tested.
+\end{itemize}
+
+\rule{1\linewidth}{0.25pt}
+\end{document}
