@@ -1,0 +1,196 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+\pdfinfo{
+  /Title (example.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Khoo Wu Zhe Samuel)
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Part 6 - Single-Stage Cluster Sampling}} \\
+\end{center}
+
+\section{\underline{6.1 Description}}
+
+Cluster sampling refers to the selection of a sample of clusters from the totality of all clusters. If all the elements in the selected clusters are surveyed, we call the method single-stage cluster sampling.
+
+\textbf{Reasons for using cluster sampling:}
+\begin{enumerate}
+  \item Direct sampling of the elements may not be possible or feasible. For example, the lack of a listing of all population elements
+  \item Cluster sampling is usually more convenient
+  \item Cost considerations
+\end{enumerate}
+
+\textbf{Strata vs Cluster}
+\begin{enumerate}
+  \item In stratified sampling, we sample from each stratum. In cluster sampling, we select a sample of clusters.
+  \item An ideal stratum is internally homogenous while being heterogeneous between strata. An ideal cluster has most of the variation within itself, and little variation between clusters.
+\end{enumerate}
+
+\section{\underline{6.2 Notation}}
+\begin{itemize}
+  \item[$N$] number of clusters in the population
+  \item[$M_{i}$] number of elements in cluster $i$ (size of cluster $i$)
+  \item[$M$] = $\sum_{i=1}^{N}M_{i}$
+  \item total number of elements in the population (population size)
+  \item[$t_{i}$] = $\sum_{j=1}^{M_{i}}y_{ij}$
+  \item y-total in cluster $i$
+  \item[$t$] = $\sum_{i=1}^{N}t_{i} = \sum_{i=1}^{N}\sum_{j=1}^{M_{i}}y_{ij}$
+  \item population total
+  \item the variance of variable $y$ in stratum $h$
+  \item[$\bar{y}_{U}$] = $\frac{t}{M}$
+  \item population mean of variable $y$
+  \item[$S_{t}^{2}$] = $\frac{1}{N-1}\sum_{i=1}^{N}(t_{i}-\frac{t}{N})^{2}$
+  \item population variance of the cluster totals
+\end{itemize}
+
+\textbf{Sample quantities}
+\begin{itemize}
+  \item[$n$] number of clusters sampled
+  \item[\textbf{S}] simple random sample of $n$ clusters
+  \item[$\bar{t}$] = $\frac{1}{n}\sum_{i \in \textbf{S}}t_{i}$
+  \item sample mean of the cluster total $t_{i}$
+  \item[$\hat{R}_{mpe}$] = $\frac{\sum_{i \in \textbf{S}}t_{i}}{\sum_{i \in \textbf{S}}M_{i}} = \frac{\sum_{i \in \textbf{S}}\sum_{j=1}^{M_{i}}y_{ij}}{\sum_{i \in \textbf{S}}M_{i}}$
+  \item sample mean of variable $y$ per element
+\end{itemize}
+
+\section{\underline{6.3 Estimation of population total}}
+\section{\underline{and mean}}
+\subsection{6.3.1 Naive number-raised estimator}
+If SRS is used to select the clusters,
+\begin{center}
+  $\bar{t} = \frac{1}{n}\sum_{i \in \textbf{S}}t_{i}$
+\end{center}
+is an unbiased estimator of the mean cluster total $\frac{1}{N}\sum_{i=1}^{N}t_{i}$
+\begin{center}
+  $\hat{t}_{unb} = N\bar{t}$
+\end{center}
+is an unbiased estimator of the population total.
+
+\vspace{5}
+
+\textbf{Variance of estimator:}
+\begin{center}
+  $V(\hat{t}_{unb}) = V(N\bar{t}) = N^{2}(1-\frac{n}{N})\frac{S_{t}^{2}}{n}$
+\end{center}
+
+\textbf{Estimated variance of estimator:}
+\begin{center}
+  $\hat{V}(\hat{t}_{unb}) = N^{2}(1-\frac{n}{N})\frac{s_{t}^{2}}{n}$
+\end{center}
+where
+\begin{center}
+  $s_{t}^{2} = \frac{1}{n-1}\sum_{i \in \textbf{S}}(t_{i} - \bar{t})^{2}$
+\end{center}
+If $M$ is known, we can estimate $\bar{y}_{U}$ by
+\begin{center}
+  $\hat{\bar{y}}_{unb} = \frac{\hat{t}_{unb}}{M}$
+\end{center}
+with $SE(\hat{\bar{y}}_{unb}) = \frac{SE(\hat{t}_{unb})}{M}$
+
+\subsection{6.3.2 Ratio estimator}
+Ratio estimator of $\bar{y}_{U}$ is $\hat{R}_{mpe}$
+\begin{center}
+  $\hat{V}(\hat{R}_{mpe}) = \frac{1}{\bar{M}^{2}}(1-\frac{n}{N})\frac{1}{n}\frac{1}{n-1}\sum_{i \in \textbf{S}}(t_{i} - \hat{R}_{mpe}M_{i})^{2}$
+\end{center}
+where $\bar{M} = \frac{1}{n}\sum_{i \in \textbf{S}}M_{i}$ is the average cluster size of the selected clusters.
+
+\vspace{5}
+
+If M is known, the ratio estimate of the total is:
+\begin{equation}
+  \begin{split}
+    \hat{t}_{r} &= M \\
+    &= M\hat{R}_{mpe} \\
+    &= M\frac{\sum_{i \in \textbf{S}}t_{i}}{\sum_{i \in \textbf{S}}M_{i}}
+  \end{split}
+\end{equation}
+
+with estimated variance
+\begin{center}
+  $\hat{V}(\hat{t}_{r}) = N^{2}\left(\frac{\bar{M}_{U}}{\bar{M}}\right)^{2}(1-\frac{n}{N})\frac{1}{n}\frac{1}{n-1}\sum_{i \in \textbf{S}}(t_{i} - \hat{R}_{mpe}M_{i})^{2}$
+\end{center}
+
+where $\bar{M}_{U} = \frac{1}{N}\sum_{i =1}^{N}M_{i} = \frac{M}{N}$
+
+\subsection{Note:}
+The ratio estimator differs from the native estimater when the cluster sizes are unequal. By rewriting the ratio estimator,
+\begin{center}
+  $\hat{t}_{r} = \frac{M/N}{\bar{M}}\hat{t}_{unb}$
+\end{center}
+we see that the ratio estimator adjusts the naive estimate upward/downward depending on whether the mean size of the selected clusters ($\bar{M}$) is below/above the mean size of all clusters ($\bar{M}_{U}$).
+
+\vspace{5}
+
+Since the cluster total ($t_{i}$) is expected to be positively correlated with the cluster size ($M_{i}$), we expect the ratio estimator to be more efficient that the naive estimator.
+
+\rule{1\linewidth}{0.25pt}
+\end{document}

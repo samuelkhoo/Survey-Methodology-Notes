@@ -1,0 +1,255 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{color,graphicx,overpic}
+\usepackage{hyperref}
+
+
+\pdfinfo{
+  /Title (example.pdf)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Khoo Wu Zhe Samuel)
+  /Subject (Example)
+  /Keywords (pdflatex, latex,pdftex,tex)}
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+    {\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+        {\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+    }
+
+% Turn off header and footer
+\pagestyle{empty}
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+
+% Define BibTeX command
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+%My Environments
+\newtheorem{example}[section]{Example}
+% -----------------------------------------------------------------------
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\underline{Part 7 - Two-Stage Cluster Sampling}} \\
+\end{center}
+
+\textbf{Stage 1:} a simple random sample of clusters are selected
+
+\textbf{Stage 2:} a simple random sample of elements is taken from each cluster selected at stage 1
+
+\vspace{5}
+
+\textbf{Difference between two-stage and two-phase sampling:}
+\begin{itemize}
+  \item For 2-phase sampling, the sampling units are the same for both phases of sampling
+  \item For 2-stage sampling, we have different primary and secondary sampling units
+\end{itemize}
+
+\section{\underline{7.1 Naive number-raised estimator}}
+
+Under single-stage cluster sampling, $t_{i}$ is known. However, this is not observed under 2-stage cluster sampling.
+
+\vspace{5}
+
+Replace $t_{i}$ by the estimate,
+\begin{equation}
+  \begin{split}
+    \hat{t}_{i} &= M_{i}\bar{y}_{i} \\
+    &= M_{i}\frac{\sum_{j \in \textbf{S}_{i}} y_{ij}}{m_{i}}
+  \end{split}
+\end{equation}
+
+where $\textbf{S}_{i}$ denotes the second stage SRS of $m_{i}$ elements selected from cluster $i$
+
+Hence,
+\begin{equation}
+  \begin{split}
+    \hat{\hat{t}}_{unb} &= N\bar{\hat{t}} \\
+    &= \frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}
+  \end{split}
+\end{equation}
+
+\subsection{Proof for unbiased estimator:}
+\begin{equation}
+  \begin{split}
+    E(\hat{\hat{t}}_{unb}) &= E(\frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}) \\
+    &= E\left\{\frac{N}{n}\sum_{i \in \textbf{S}}E_{2}(\hat{t}_{i})\right\} \\
+    &= E\left(\frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}\right) \\
+    &= t
+  \end{split}
+\end{equation}
+
+\textbf{Note:} $E_{2}$ and $V_{2}$ denote the conditional expectation and conditional variance under stage-2 sampling given the clusters selected at stage 1.
+
+\subsection{Estimation of Variance:}
+
+It is to be expected that the variance of $\frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}$ is larger than that of $\frac{N}{n}\sum_{i \in \textbf{S}}t_{i}$ because of the additional source of variability caused by estimating $t_{i}$.
+
+\begin{equation}
+  \begin{split}
+    V_{2-stage}(\hat{\hat{t}}_{unb}) &= V(N\bar{\hat{t}}) \\
+    &= V(\frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}) \\
+    &= V\left\{\frac{N}{n}\sum_{i \in \textbf{S}}E_{2}(\hat{t}_{i})\right\} + E\left\{V_{2}\left(\frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}\right)\right\} \\
+    &= V\left(\frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}\right)\\
+    &\hspace{7} + E\left\{\left(\frac{N}{n}\right)^{2}\left[\sum_{i \in \textbf{S}} M_{i}^{2} \left(1-\frac{m_{i}}{M_{i}}\right)\frac{S_{yi}^{2}}{m_{i}}\right]\right\} \\
+    &= N^{2}\left(1-\frac{n}{N}\right)\frac{S_{t}^{2}}{n} + \frac{N}{n}\sum_{i =1}^{N} M_{i}^{2} \left(1-\frac{m_{i}}{M_{i}}\right)\frac{S_{yi}^{2}}{m_{i}} \\
+    &= V(N\bar{t}) + V_{ssu}
+  \end{split}
+\end{equation}
+
+where
+\begin{itemize}
+  \item $S_{yi}^{2} = \frac{1}{M_{i}-1}\sum_{j=1}^{M_{i}}(y_{ij}-\bar{y}_{C_{i}})^{2}$ is the cluster variance of y for cluster $i$
+  \item $\bar{y}_{C_{i}} = \frac{1}{M_{i}}\sum_{j=1}^{M_{i}}y_{ij}$ is the cluster mean of y for cluster $i$
+  \item $V_{ssu}$ is the variance of the secondary sampling unit
+\end{itemize}
+
+\textbf{Note:}
+
+Under SRS, $E(\bar{x}) = \bar{x}_{U}$ and $E(N\bar{x}) = N\bar{x}_{U} = \sum_{i=1}^{N}x_{i}$
+
+\begin{equation}
+  \begin{split}
+    \hat{V}_{2-stage}(\hat{\hat{t}}_{unb}) &= N^{2}(1-\frac{n}{N})\frac{1}{n}\frac{\sum_{i \in \textbf{S}} (\hat{t}_{i}-\bar{\hat{t}})^{2}}{n-1} \\
+    & \hspace{7} + \frac{N}{n} \sum_{i \in \textbf{S}}M_{i}^{2}(1-\frac{m_{i}}{M_{i}})\frac{s_{yi}^{2}}{m_{i}}
+  \end{split}
+\end{equation}
+
+\textbf{Note:} the second term of (5) is not just estimating $V_{ssu}$ but also correcting for the bias of $\tilde{V}$ in estimating $V(N\bar{t})$ in (4).
+
+\vspace{5}
+
+To view the full proof, see part 10 of notes, page 133 to 136.
+
+\section{\underline{7.2 Ratio estimator}}
+
+Similarly, replace $t_{i}$ by its estimate in the ratio estimator to obtain
+\begin{equation}
+  \begin{split}
+    \hat{\hat{R}}_{mpe} &= \frac{\sum_{i \in \textbf{S}}\hat{t}_{i}}{\sum{i \in \textbf{S}} M_{i}} \\
+    &= \frac{\frac{N}{n}\sum_{i \in \textbf{S}}\hat{t}_{i}}{N\bar{M}} \\
+    &= \frac{\hat{\hat{t}}_{unb}}{N\bar{M}}
+  \end{split}
+\end{equation}
+
+with estimated variance
+\begin{equation}
+  \begin{split}
+    \hat{V}_{2-stage}(\hat{\hat{R}}_{mpe}) &= \frac{1}{\bar{M}^{2}}(1-\frac{n}{N})\frac{1}{n}\frac{1}{n-1}\sum_{i \in \textbf{S}}(\hat{t}_{i} - \hat{\hat{R}}_{mpe}M_{i})^{2} \\
+    & \hspace{7} + \frac{1}{N^{2}\bar{M}^{2}}\frac{N}{n}\sum_{i \in \textbf{S}}M_{i}^{2}(1-\frac{m_{i}}{M_{i}})\frac{s_{yi}^{2}}{m_{i}}
+  \end{split}
+\end{equation}
+
+\textbf{Note:} the second term of (7) is just the second term of (5) divided by $N^{2}\bar{M}^{2}$
+\rule{1\linewidth}{0.25pt}
+
+\begin{center}
+     \Large{\underline{Part 8 - Sampling with unequal}} \\
+     \Large{\underline{probabilities}}
+\end{center}
+
+If the sampling scheme is such that the $\pi_{i}$ are not all the same, we call it sampling with unequal probabilities.
+
+\section{\underline{8.1 Horvitz-Thompson estimator}}
+
+An unbiased estimator of the population total of a varibale $y$ is
+\begin{center}
+  $\hat{t}_{HT} = \sum_{i \in \textbf{S}}y_{i}w_{i} = \sum_{i \in \textbf{S}}\frac{y_{i}}{\pi_{i}}$
+\end{center}
+
+To view proof of unbiasedness, see part 11 of notes, page 142.
+
+\vspace{5}
+
+\textbf{Assumption:} there must be a chance for every unit to be selected. ($\pi_{i} > 0$)
+
+\section{\underline{8.2 PPS sampling}}
+
+One special class of unequal probability sampling is to sample with probability proportional to size (PPS).
+
+\textbf{Definition:}
+
+Let $x_{1}, ..., x_{N}$ be the known values of a positive auxiliary variable. It is also called a size variable since $x$ is often a measure of size.
+
+Any sampling scheme with 1st order inclusion probabilities $\pi_{i} = P(i \in \trxtbf{S}) \propto x_{i}$ is called a PPS sampling scheme.
+
+\vspace{5}
+
+Under PPS sampling, $\pi_{i} = cx_{i}$, and the proportionality constant is
+\begin{equation}
+  c = \frac{n}{\sum_{i=1}^{N}x_{i}}
+\end{equation}
+
+Hence,
+\begin{equation}
+  \pi_{i} = \frac{nx_{i}}{\sum_{i=1}^{N}x_{i}} = n \psi_{i}
+\end{equation}
+
+where $\psi_{i} = \frac{x_{i}}{\sum_{i=1}^{N}x_{i}}$
+
+\textbf{Note:}
+\begin{itemize}
+  \item this sampling scheme is non-unique since PPS is only conditional on first order probability. There is more than one way to do it.
+  \item There may be cases where $x_{i}$ is so large that $\pi_{i}>1$. This $x_{i}$ is a certainty unit and should be treated as a seperate strata. Conduct PPS on the remaining.
+\end{itemize}
+
+\textbf{PPS single stage cluster sampling:}
+
+Clusters are selected with probability proportional to cluster size ($x_{i} = M_{i}$)
+
+In this case,
+\begin{center}
+  $\psi_{i} = \frac{M_{i}}{M}$ and $\pi_{i} = n\psi_{i} = \frac{nM_{i}}{M}$
+\end{center}
+
+For single stage cluster sampling, $y_{i} = t_{i}$ and hence,
+\begin{equation}
+  \hat{t}_{HT} = \sum_{i \in \textbf{S}}\frac{t_{i}}{\pi_{i}} = \frac{1}{n}\sum_{i \in \textbf{S}}\frac{t_{i}}{\psi_{i}}
+\end{equation}
+\rule{1\linewidth}{0.25pt}
+\end{document}
